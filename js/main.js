@@ -7,6 +7,9 @@ var deltaTime;
 // Lights
 var dirLight;
 
+// Gameplay objects
+var player = new THREE.Group();
+
 /* FUNCTIONS */
 function Start()
 {
@@ -15,14 +18,14 @@ function Start()
 
     // Create camera
     camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.set( 0, 10, 20);
+    camera.position.set( 0, 10, 8);
     camera.lookAt(new THREE.Vector3(0,0,0));
 
     // Create scene
     scene = new THREE.Scene();
     scene.background = new THREE.Color().setHSL( 0.6, 0, 1 );
 
-    scene.fog = new THREE.FogExp2( 0xffffff, 0.002 );
+    scene.fog = new THREE.FogExp2( 0xffffff, 0.02 );
 
     // Set up the 3D renderer
     SetupRenderer();
@@ -86,26 +89,38 @@ function CreateGeometry()
     grassTexture.repeat.set( 2048, 2048 );
     
     // Geometry
-    var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
+    var planeGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
 
     // Material
-    var groundMat = new THREE.MeshBasicMaterial( { color: 0xffffff, map: grassTexture } );
-
-    var ground = new THREE.Mesh( groundGeo, groundMat );
-    //ground.position.y = -33;
-    ground.rotation.x = -Math.PI / 2;
+    var grassMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, map: grassTexture } );
 
     // Add mesh to scene
+    var ground = new THREE.Mesh( planeGeometry, grassMaterial );
+    ground.rotation.x = -Math.PI / 2;
     scene.add( ground );
 
     /* PLAYER CHARACTER */
-    var playerTexture = textureLoader.load( "../img/placeholderPlayer.png" );
-    var playerMaterial = new THREE.SpriteMaterial( { map: playerTexture, color: 0xffffff, fog: true } );
+    player.playerTexture = textureLoader.load( "../img/placeholderSpritesheet.png" );
+    var playerMaterial = new THREE.SpriteMaterial( { map: player.playerTexture, color: 0xffffff, fog: true } );
     var playerSprite = new THREE.Sprite( playerMaterial );
+    
+    playerSprite.center.set(0.5, 0);
 
-    playerSprite.position.set(0,0.4,0);
+    playerSprite.wrapS = playerSprite.wrapT = THREE.RepeatWrapping;
+    player.playerTexture.repeat.set(0.25,1);
+    player.playerTexture.offset.set(0,0);
 
-    scene.add(playerSprite);
+    playerSprite.position.set(0,0,0);
+
+    // Create animation variables
+    player.currentFrame = 0;
+    player.frames = 4;
+    player.animationUpdateTime = 0.15;
+    player.currentTime = 0;
+
+    player.add(playerSprite);
+
+    scene.add(player);
 }
 
 function onWindowResize() {
@@ -118,6 +133,20 @@ function onWindowResize() {
 }
 
 function Update() {
+    deltaTime = clock.getDelta();
+
+    // Update player animation
+    player.currentTime += deltaTime;
+    if(player.currentTime >= player.animationUpdateTime){
+        player.currentTime = 0;
+        player.currentFrame += 1;
+        if(player.currentFrame >= player.frames){
+            player.currentFrame = 0;
+        }
+        
+        player.playerTexture.offset.set(player.currentFrame/player.frames,0);
+    }
+
     // Request the next update frame when update time has elapsed
     requestAnimationFrame(Update);
 
@@ -127,7 +156,6 @@ function Update() {
 
 function Render()
 {
-    deltaTime = clock.getDelta();
     renderer.render( scene, camera );
 }
 
