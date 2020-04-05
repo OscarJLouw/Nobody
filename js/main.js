@@ -1,5 +1,6 @@
 /* VARIABLES */
 var camera, scene, renderer;
+var textureLoader = new THREE.TextureLoader();
 var clock = new THREE.Clock();
 var deltaTime;
 
@@ -74,11 +75,16 @@ function SetupLights()
 
 function CreateGeometry()
 {
+    var grassTexture = textureLoader.load( "../img/tilingGrass.png" );
+
+    grassTexture.anisotropy = 16;
+    grassTexture.wrapS = grassTexture.wrapT = THREE.RepeatWrapping;
+    grassTexture.repeat.set( 512, 512 );
+    
     // GROUND PLANE
     var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
     // Create material
-    var groundMat = new THREE.MeshLambertMaterial( { color: 0xffffff } );
-    groundMat.color.setHSL( 0.095, 1, 0.75 );
+    var groundMat = new THREE.MeshBasicMaterial( { color: 0xffffff, map: grassTexture } );
 
     var ground = new THREE.Mesh( groundGeo, groundMat );
     ground.position.y = - 33;
