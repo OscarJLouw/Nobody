@@ -99,28 +99,45 @@ function CreateGeometry()
     ground.rotation.x = -Math.PI / 2;
     scene.add( ground );
 
+    /****************************************/
+
     /* PLAYER CHARACTER */
     player.playerTexture = textureLoader.load( "../img/placeholderSpritesheet.png" );
     var playerMaterial = new THREE.SpriteMaterial( { map: player.playerTexture, color: 0xffffff, fog: true } );
     var playerSprite = new THREE.Sprite( playerMaterial );
     
+    // set pivot/rotation point
     playerSprite.center.set(0.5, 0);
 
+    // set up texture wrapping and offset
     playerSprite.wrapS = playerSprite.wrapT = THREE.RepeatWrapping;
     player.playerTexture.repeat.set(0.25,1);
     player.playerTexture.offset.set(0,0);
 
-    playerSprite.position.set(0,0,0);
-
-    // Create animation variables
+    // create animation variables
     player.currentFrame = 0;
     player.frames = 4;
     player.animationUpdateTime = 0.15;
     player.currentTime = 0;
 
+    // position and add to scene
+    playerSprite.position.set(0,0,0);
     player.add(playerSprite);
 
     scene.add(player);
+
+    /****************************************/
+
+    /* SCENERY */
+    var carTexture = textureLoader.load( "../img/placeholderCar.png" );
+    var carMaterial = new THREE.SpriteMaterial( { map: carTexture, color: 0xffffff, fog: true } );
+    var carSprite = new THREE.Sprite( carMaterial );
+
+    //carSprite.position.set(0,0,-0.1);
+    //carSprite.scale.set(2.5,2.5,1);
+    //carSprite.center.set(0.5, 0);
+    
+    scene.add(carSprite);
 }
 
 function onWindowResize() {
