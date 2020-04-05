@@ -14,18 +14,21 @@ function Start()
     var container = document.getElementById( 'container' );
 
     // Create camera
-    camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 5000 );
-    camera.position.set( 0, 0, 250 );
+    camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1000 );
+    camera.position.set( 0, 10, 20);
+    camera.lookAt(new THREE.Vector3(0,0,0));
 
     // Create scene
     scene = new THREE.Scene();
     scene.background = new THREE.Color().setHSL( 0.6, 0, 1 );
 
+    scene.fog = new THREE.FogExp2( 0xffffff, 0.002 );
+
     // Set up the 3D renderer
     SetupRenderer();
 
     // Add lights
-    SetupLights();
+    // SetupLights();
 
     // Create world geometry
     CreateGeometry();
@@ -75,24 +78,34 @@ function SetupLights()
 
 function CreateGeometry()
 {
+    /* GRASS */
+    // Texture
     var grassTexture = textureLoader.load( "../img/tilingGrass.png" );
-
     grassTexture.anisotropy = 16;
     grassTexture.wrapS = grassTexture.wrapT = THREE.RepeatWrapping;
-    grassTexture.repeat.set( 512, 512 );
+    grassTexture.repeat.set( 2048, 2048 );
     
-    // GROUND PLANE
+    // Geometry
     var groundGeo = new THREE.PlaneBufferGeometry( 10000, 10000 );
-    // Create material
+
+    // Material
     var groundMat = new THREE.MeshBasicMaterial( { color: 0xffffff, map: grassTexture } );
 
     var ground = new THREE.Mesh( groundGeo, groundMat );
-    ground.position.y = - 33;
-    ground.rotation.x = - Math.PI / 2;
-    ground.receiveShadow = true;
+    //ground.position.y = -33;
+    ground.rotation.x = -Math.PI / 2;
 
     // Add mesh to scene
     scene.add( ground );
+
+    /* PLAYER CHARACTER */
+    var playerTexture = textureLoader.load( "../img/placeholderPlayer.png" );
+    var playerMaterial = new THREE.SpriteMaterial( { map: playerTexture, color: 0xffffff, fog: true } );
+    var playerSprite = new THREE.Sprite( playerMaterial );
+
+    playerSprite.position.set(0,0.4,0);
+
+    scene.add(playerSprite);
 }
 
 function onWindowResize() {
