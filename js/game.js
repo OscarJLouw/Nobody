@@ -1,4 +1,4 @@
-// Game configuration with preloading and resize
+// Game configuration
 var config = {
     type: Phaser.AUTO,
     backgroundColor: '#000000',
@@ -8,32 +8,8 @@ var config = {
         width: '100%',
         height: '100%'
     },
-    scene: {
-        preload: Preload,
-        create: Start
-    }
+    scene: [BootGame, Moor] // list of scenes in the project
 }
 
+// Create the game
 var game = new Phaser.Game(config);
-
-// Load images, sounds, etc
-function Preload ()
-{
-}
-
-// Initialize the game
-function Start ()
-{
-    this.scale.on('resize', Resize, this);
-}
-
-// Resize game window with browser
-function Resize (gameSize, baseSize, displaySize, resolution)
-{
-    var width = gameSize.width;
-    var height = gameSize.height;
-
-    this.cameras.resize(width, height);
-
-    // Should manually reposition/scale all the elements here
-}
