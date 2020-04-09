@@ -18,10 +18,15 @@ class Moor extends Phaser.Scene {
             frameWidth: 128,
             frameHeight: 128
         });
+
+        // Load body shapes from JSON file generated using PhysicsEditor
+        this.load.json('shapes', '../../physics/physics-shapes.json');
     }
 
     // Called when scene is loaded
     create(){
+        var shapes = this.cache.json.get('shapes');
+
         // Set up events
         this.input.on('pointerdown', function (pointer){
             this.handleClick(pointer);
@@ -31,19 +36,38 @@ class Moor extends Phaser.Scene {
         this.background = this.add.tileSprite(0,0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight, "background");
         this.background.setOrigin(0,0);
 
-        this.car = this.add.image(500,500, "car");
-        this.car.setOrigin(0.5,0.5);
-        this.car.setScale(0.8, 0.8);
+        this.car = this.matter.add.image(500,500, "car");
+        this.car.setBody(shapes.carBody);
+
+        this.car.setOrigin(0.5, 0.5);
+        //this.car.setScale(0.8, 0.8);
 
         // Sprites
-        this.player = this.add.sprite(128, 128, "player");
-        this.player.setOrigin(0.5,1);
+        this.player = this.matter.add.sprite(0, 0, "player");
+        this.player.setBody(shapes.player);
+        this.player.setOrigin(0.5,0.5);
+        this.player.setPosition(200,200);
+        //this.player.body.inertia = Infinity;
         //this.player.setScale(.3,.3);
-        this.player.targetPosition = new Phaser.Math.Vector2(500, 500);
+        this.player.targetPosition = new Phaser.Math.Vector2(200, 200);
+
+
+        // Physics
+
+        this.matter.world.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
+        
+        /*
+        this.matter.world.on('collisionstart', function (event, player, car) {
+
+            player.gameObject.setTint(0xff0000);
+            car.gameObject.setTint(0x00ff00);
+    
+        });
+        */
     }
 
     update(time, delta){
-        this.movePlayer(0.3 * delta);
+        this.movePlayer(.3 * delta);
     }
 
     movePlayer(moveSpeed){
@@ -76,21 +100,15 @@ class Moor extends Phaser.Scene {
                 } else if(moveDirection.y > 0)
                 {
                     // up
-                    this.player.setFrame(4);
+                    this.player.setFrame(0);
                 }
             }
         }
 
-        
-        
-        
+        //var newPosition = currentPosition.subtract(moveDirection);
+        this.player.setVelocity(-moveDirection.x, -moveDirection.y);
+        this.player.setAngle(0);
 
-        
-
-        
-
-        var newPosition = currentPosition.subtract(moveDirection);
-        this.player.setPosition(newPosition.x, newPosition.y);
     }
 
     handleClick(pointer){
