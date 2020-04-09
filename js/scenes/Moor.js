@@ -25,6 +25,10 @@ class Moor extends Phaser.Scene {
 
     // Called when scene is loaded
     create(){
+        // Camera
+        this.cameras.main.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
+
+        // Physics shapes
         var shapes = this.cache.json.get('shapes');
 
         // Set up events
@@ -51,6 +55,8 @@ class Moor extends Phaser.Scene {
         //this.player.setScale(.3,.3);
         this.player.targetPosition = new Phaser.Math.Vector2(200, 200);
 
+        // Camera smooth following
+        this.cameras.main.startFollow(this.player, false, 0.05, 0.05);
 
         // Physics
 
@@ -112,7 +118,7 @@ class Moor extends Phaser.Scene {
     }
 
     handleClick(pointer){
-        this.player.targetPosition = new Phaser.Math.Vector2(pointer.x, pointer.y);
+        this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
     }
 }
 
