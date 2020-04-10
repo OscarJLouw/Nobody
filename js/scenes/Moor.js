@@ -12,10 +12,10 @@ class Moor extends Phaser.Scene {
     // Loads all assets before scene starts
     preload() {
         this.load.image("background", "../../img/tilingGrass.png");
-        this.load.image("car", "../../img/placeholderCar.png");
-        this.load.spritesheet("player", "../../img/placeholderSpriteSheet.png", {
-            frameWidth: 256, //128
-            frameHeight: 256 //128
+        this.load.image("car", "../../img/car.png");
+        this.load.spritesheet("player", "../../img/player/playerSprites.png", {
+            frameWidth: 128, //128
+            frameHeight: 128 //128
         });
 
         // Load body shapes from JSON file generated using PhysicsEditor
@@ -42,15 +42,16 @@ class Moor extends Phaser.Scene {
         this.car = this.matter.add.image(500, 500, "car");
         this.car.setBody(shapes.carBody);
 
-        this.car.setOrigin(0.5, 0.5);
+        this.car.setOrigin(0.49, 0.62);
         this.car.setDepth(2);
-        //this.car.setScale(0.8, 0.8);
+        this.car.setScale(0.4, 0.4);
 
 
         // Sprites
         this.player = this.matter.add.sprite(0, 0, "player");
+        //this.player.sprite.yOffset = 1;
         this.player.setBody(shapes.player);
-        this.player.setOrigin(0.5, 0.5);
+        this.player.setOrigin(0.5, 1);
         this.player.setPosition(200, 200);
         //this.player.body.inertia = Infinity;
         //this.player.setScale(.3,.3);
