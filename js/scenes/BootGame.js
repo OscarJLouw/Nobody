@@ -5,8 +5,6 @@ class BootGame extends Phaser.Scene {
         super("bootGame");
     }
 
-    
-
     // preload loads all assets before scene starts
     preload(){
     }
