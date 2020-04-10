@@ -1,7 +1,6 @@
-class Moor extends Phaser.Scene {
-    constructor() {
-        // the "super" function makes this class inherit all characteristics of predecessor (the Phaser "Scene" class definition)
-        super("MoorLevel");
+class npc extends Phaser.GameObjects.Sprite {
+    constructor(scene) {
+        super(scene, x, y, "npc");
     }
 
     sceneConfig = {

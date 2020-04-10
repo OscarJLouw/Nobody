@@ -11,13 +11,13 @@ var config = {
     physics: {
         default: 'matter',
         matter: {
-            /*
+            
             debug: {
                 renderFill: false,
                 showInternalEdges: true,
                 showConvexHulls: true
             },
-            */
+            
             gravity: {
                 x: 0,
                 y: 0
