@@ -16,6 +16,4 @@ class Car extends Phaser.Physics.Matter.Sprite {
         this.setDepth(2);
         this.setStatic(true); 
     }
-
-    
 }
