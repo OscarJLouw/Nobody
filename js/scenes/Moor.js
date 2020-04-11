@@ -11,7 +11,7 @@ class Moor extends Phaser.Scene {
 
     // Loads all assets before scene starts
     preload() {
-        this.load.image("background", "../../img/tilingGrass.png");
+        this.load.image("background", "../../img/moor/moor_ground.jpg");
         this.load.image("car", "../../img/car.png");
         this.load.spritesheet("player", "../../img/player/playerSprites.png", {
             frameWidth: 128, //128
@@ -36,7 +36,7 @@ class Moor extends Phaser.Scene {
         }, this);
 
         // Background
-        this.background = this.add.tileSprite(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight, "background");
+        this.background = this.add.image(0, 0, "background");
         this.background.setOrigin(0, 0);
 
         this.car = this.matter.add.image(500, 500, "car");
@@ -126,12 +126,30 @@ class Moor extends Phaser.Scene {
         //var newPosition = currentPosition.subtract(moveDirection);
         this.player.setVelocity(-moveDirection.x, -moveDirection.y);
         this.player.setAngle(0);
-
-
     }
 
     handleClick(pointer) {
+        /*var target = this.matter.vector.create(pointer.worldX, pointer.worldY);
+        var origin = this.matter.vector.create(this.player.x, this.player.y);
+
+        this.findFastestRoute(origin, this.car.body, target);
+        */
+       
         this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
+    }
+
+    findFastestRoute(origin, body, target){
+        //var bodies = this.matter.world.loc();
+        //var hitBodies = this.matter.query.point(body, {x: 500, y: 500});
+        //var hitBodies = this.matter.query.ray(body, target, {x: 500, y: 500});
+
+        console.log(bodies);
+        console.log(hitBodies.length);
+
+        //var hitBodies = Phaser.Physics.Matter.
+        if(hitBodies.includes(body)){
+            Console.log("Hit!");
+        }
     }
 }
 
