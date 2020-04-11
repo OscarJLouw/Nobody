@@ -1,8 +1,8 @@
 {
 	"generator_info": "Shape definitions generated with PhysicsEditor. Visit https://www.codeandweb.com/physicseditor",
-	"player": {
+	"player_body": {
 		"type": "fromPhysicsEditor",
-		"label": "player",
+		"label": "player_body",
 		"isStatic": false,
 		"density": 0.10000000149011612,
 		"restitution": 0,
@@ -24,7 +24,7 @@
 			}
 		]
 	},
-	"moor_bush": {
+	"bush_body": {
 		"type": "fromPhysicsEditor",
 		"label": "moor_bush",
 		"isStatic": true,
@@ -90,7 +90,7 @@
 			}
 		]
 	},
-	"carBody": {
+	"car_body": {
 		"type": "fromPhysicsEditor",
 		"label": "carBody",
 		"isStatic": true,
@@ -114,7 +114,7 @@
 			}
 		]
 	},
-	"hag": {
+	"hag_body": {
 		"type": "fromPhysicsEditor",
 		"label": "hag_body",
 		"isStatic": true,
@@ -135,6 +135,37 @@
 				"vertices": [
 					[ { "x":75, "y":20 }, { "x":17, "y":728 }, { "x":463, "y":843 }, { "x":755, "y":380 }, { "x":617, "y":19 } ],
 					[ { "x":744, "y":728 }, { "x":755, "y":380 }, { "x":463, "y":843 } ]
+				]
+			}
+		]
+	},
+	"fence_body": {
+		"type": "fromPhysicsEditor",
+		"label": "fence_body",
+		"isStatic": false,
+		"density": 0.10000000149011612,
+		"restitution": 0,
+		"friction": 0.10000000149011612,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":1730, "y":-49 }, { "x":-32, "y":-15 }, { "x":-7, "y":159 }, { "x":1679, "y":159 } ]
+				]
+			},
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":1839, "y":-55 }, { "x":1875, "y":163 }, { "x":3760, "y":168 }, { "x":3746, "y":-48 } ]
 				]
 			}
 		]
