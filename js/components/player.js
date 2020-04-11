@@ -1,6 +1,3 @@
-const velocity = 2000;
-const updateBy = 2;
-
 class Player extends Phaser.Physics.Matter.Sprite {
     constructor(scene, shape) {
 

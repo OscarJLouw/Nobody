@@ -13,6 +13,7 @@ class Moor extends Phaser.Scene {
     preload() {
         this.load.image("background", "../../img/tilingGrass.png");
         this.load.image("car", "../../img/car.png");
+        this.load.image("hag", "../../img/hag.png")
         this.load.spritesheet("player", "../../img/player/playerSprites.png", {
             frameWidth: 128, 
             frameHeight: 128 
@@ -47,6 +48,8 @@ class Moor extends Phaser.Scene {
         this.car = new Car(this, shapes.carBody);
 
         this.player = new Player(this, shapes.player);
+
+        this.hag = new NPC(this, "hag", shapes.player);
 
         /*this.npc01 = this.matter.add.sprite(0, 0, "npc01");
         this.npc01.setBody(shapes.player);
