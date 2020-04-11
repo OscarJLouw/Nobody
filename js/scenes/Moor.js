@@ -13,6 +13,7 @@ class Moor extends Phaser.Scene {
     preload() {
         this.load.image("background", "../../img/moor_small.jpg");
         this.load.image("bushes", "../../img/moor_bush_small.png");
+        this.load.image("fence", "../../img/fence.png");
         this.load.image("car", "../../img/car.png");
         this.load.image("hag", "../../img/hag.png");
 
@@ -47,6 +48,8 @@ class Moor extends Phaser.Scene {
         this.background = new Level(this, "background", 0);
 
         this.bushes = new Level(this, "bushes", 5);
+
+        this.fence = new Level(this, "fence", 0);
 
         this.car = new Car(this, shapes.carBody);
 
