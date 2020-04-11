@@ -2,8 +2,8 @@ class NPC extends Phaser.Physics.Matter.Sprite {
     constructor(scene, npcName, shape) {
 
         //npc position on the screen
-        var x = 0;
-        var y = 0;
+        var x = 1800;
+        var y = 290;
        
         //add npc on the screen
         super(scene.matter.world, x, y, npcName);
@@ -11,50 +11,11 @@ class NPC extends Phaser.Physics.Matter.Sprite {
         
         //set npc properties
         this.setBody(shape);
-        this.setPosition(200, 200);
+        this.setScale(0.4, 0.4);
+        this.setPosition(x, y);
         this.setOrigin(0.5, 1);
         this.setDepth(1);
+        this.setStatic(true);
         this.targetPosition = new Phaser.Math.Vector2(200, 200);
-    }
-    
-    movePlayer(moveSpeed) {
-        var currentPosition = new Phaser.Math.Vector2(this.x, this.y);
-        var moveDirection = new Phaser.Math.Vector2(currentPosition.x, currentPosition.y);
-
-        moveDirection.subtract(this.targetPosition);
-        var length = moveDirection.length();
-
-        if (length > moveSpeed) {
-            moveDirection.normalize();
-            moveDirection.scale(moveSpeed);
-        }
-
-        if (length < 0.2) {
-            // idle
-            this.setFrame(1);
-        } else {
-            if (Math.abs(moveDirection.x) > Math.abs(moveDirection.y)) {
-                if (moveDirection.x < 0) {
-                    // right
-                    this.setFrame(3);
-                } else if (moveDirection.x > 0) {
-                    // left
-                    this.setFrame(2);
-                }
-            } else {
-                if (moveDirection.y < 0) {
-                    // down
-                    this.setFrame(1);
-                } else if (moveDirection.y > 0) {
-                    // up
-                    this.setFrame(0);
-                }
-            }
-        }
-
-        console.log(-moveDirection.x + " ### " + -moveDirection.y);
-        //var newPosition = currentPosition.subtract(moveDirection);
-        this.setVelocity(-moveDirection.x, -moveDirection.y);
-        this.setAngle(0);
     }
 }

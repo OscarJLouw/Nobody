@@ -2,8 +2,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
     constructor(scene, shape) {
 
         //player position on the screen
-        var x = 0;
-        var y = 0;
+        var x = 1860;
+        var y = 1340;
        
         //add player on the screen
         super(scene.matter.world, x, y, "player");
@@ -11,10 +11,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
         
         //set player properties
         this.setBody(shape);
-        this.setPosition(200, 200);
+        this.setPosition(x, y);
         this.setOrigin(0.5, 1);
         this.setDepth(1);
-        this.targetPosition = new Phaser.Math.Vector2(200, 200);
+        this.targetPosition = new Phaser.Math.Vector2(x, y);
     }
     
     movePlayer(moveSpeed) {

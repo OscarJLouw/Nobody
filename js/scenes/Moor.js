@@ -13,8 +13,10 @@ class Moor extends Phaser.Scene {
     preload() {
         this.load.image("background", "../../img/moor_small.jpg");
         this.load.image("bushes", "../../img/moor_bush_small.png");
+        this.load.image("fence", "../../img/fence.png");
         this.load.image("car", "../../img/car.png");
-        this.load.image("hag", "../../img/hag.png")
+        this.load.image("hag", "../../img/hag.png");
+
         this.load.spritesheet("player", "../../img/player/playerSprites.png", {
             frameWidth: 128, 
             frameHeight: 128 
@@ -42,9 +44,8 @@ class Moor extends Phaser.Scene {
             this.handleClick(pointer);
         }, this);
 
-        // Background
-        this.background = this.add.image(0, 0, "background");
-        this.background.setOrigin(0, 0);
+        //Game Components
+        this.background = new Level(this, "background", 0);
 
         // Bushes overlay
         
@@ -58,20 +59,13 @@ class Moor extends Phaser.Scene {
         this.bushes.setDepth(5);
         
 
+        this.fence = new Level(this, "fence", 0);
 
         this.car = new Car(this, shapes.carBody);
 
         this.player = new Player(this, shapes.player);
 
         //this.hag = new NPC(this, "hag", shapes.player);
-
-        /*this.npc01 = this.matter.add.sprite(0, 0, "npc01");
-        this.npc01.setBody(shapes.player);
-        this.npc01.setOrigin(0.5, 1);
-        this.npc01.setPosition(1200, 300);
-        this.npc01.targetPosition = new Phaser.Math.Vector2(200, 200);
-        this.npc01.setDepth(1);
-        this.npc01.setStatic(true);*/
 
         // Camera smooth following
         this.cameras.main.startFollow(this.player, false, 0.05, 0.05);
@@ -99,7 +93,6 @@ class Moor extends Phaser.Scene {
         this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
     }
 }
-
 
 /****** USEFUL FUNCTIONS ******/
 
