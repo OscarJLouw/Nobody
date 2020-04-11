@@ -47,15 +47,23 @@ class Moor extends Phaser.Scene {
         this.background.setOrigin(0, 0);
 
         // Bushes overlay
-        this.bushes = this.add.image(0, 0, "bushes");
-        this.bushes.setOrigin(0, 0);
+        
+        //var bushBody = this.matter.bodies.fromVertices(shapes.moor_bush.vertices);
+        this.bushes = this.matter.add.image(0, 0, "bushes");
+        this.bushes.setBody(shapes.moor_bush);
+        this.bushes.setStatic(true);
+        this.bushes.x = this.sceneConfig.sceneWidth/2 + 130;
+        this.bushes.y = this.sceneConfig.sceneHeight/2 + 675;
+        //this.bushes.setOrigin(0, 0);
         this.bushes.setDepth(5);
+        
+
 
         this.car = new Car(this, shapes.carBody);
 
         this.player = new Player(this, shapes.player);
 
-        this.hag = new NPC(this, "hag", shapes.player);
+        //this.hag = new NPC(this, "hag", shapes.player);
 
         /*this.npc01 = this.matter.add.sprite(0, 0, "npc01");
         this.npc01.setBody(shapes.player);

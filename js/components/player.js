@@ -52,7 +52,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
             }
         }
 
-        console.log(-moveDirection.x + " ### " + -moveDirection.y);
+        //console.log(-moveDirection.x + " ### " + -moveDirection.y);
         //var newPosition = currentPosition.subtract(moveDirection);
         this.setVelocity(-moveDirection.x, -moveDirection.y);
         this.setAngle(0);
