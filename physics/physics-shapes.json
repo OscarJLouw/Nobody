@@ -24,7 +24,7 @@
 			}
 		]
 	},
-	"moor_bush_small": {
+	"moor_bush": {
 		"type": "fromPhysicsEditor",
 		"label": "moor_bush",
 		"isStatic": true,
@@ -116,7 +116,7 @@
 	},
 	"hag": {
 		"type": "fromPhysicsEditor",
-		"label": "hag",
+		"label": "hag_body",
 		"isStatic": true,
 		"density": 0.10000000149011612,
 		"restitution": 0,
