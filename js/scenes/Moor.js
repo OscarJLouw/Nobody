@@ -44,12 +44,13 @@ class Moor extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight, "background");
         this.background.setOrigin(0, 0);
 
-        this.car = this.matter.add.image(500, 500, "car");
-        this.car.setBody(shapes.carBody);
 
-        this.car.setOrigin(0.49, 0.62);
-        this.car.setDepth(2);
-        this.car.setScale(0.4, 0.4);
+
+        /*  this.car = this.matter.add.image(500, 500, "car");
+         this.car.setBody(shapes.carBody);
+         this.car.setOrigin(0.49, 0.62);
+         this.car.setDepth(2);
+         this.car.setScale(0.4, 0.4); */
 
         // Sprites
         this.player = this.matter.add.sprite(0, 0, "player");
@@ -76,12 +77,24 @@ class Moor extends Phaser.Scene {
         // Physics
         this.matter.world.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
 
-       /*  this.matter.world.on('collisionstart', function (event, player, car) {
+        /*  this.matter.world.on('collisionstart', function (event, player, car) {
 
             player.gameObject.setTint(0xff0000);
             car.gameObject.setTint(0x00ff00);
     
         }); */
+
+        this.car = new Car(this, shapes.carBody);
+        
+       /*  this.car = new Car ({
+            scene: this,
+            key: 'car',
+            x: 500,
+            y: 500
+          }); */
+
+        console.log(this.car);
+
     }
 
     update(time, delta) {
@@ -91,9 +104,7 @@ class Moor extends Phaser.Scene {
         if (this.player.y > this.car.y) {
             this.player.setDepth(2);
             this.car.setDepth(1);
-        }
-        else
-        {
+        } else {
             this.player.setDepth(1);
             this.car.setDepth(2);
         }
