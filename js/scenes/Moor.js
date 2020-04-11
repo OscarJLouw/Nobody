@@ -14,7 +14,8 @@ class Moor extends Phaser.Scene {
         this.load.image("background", "../../img/moor_small.jpg");
         this.load.image("bushes", "../../img/moor_bush_small.png");
         this.load.image("car", "../../img/car.png");
-        this.load.image("hag", "../../img/hag.png")
+        this.load.image("hag", "../../img/hag.png");
+
         this.load.spritesheet("player", "../../img/player/playerSprites.png", {
             frameWidth: 128, 
             frameHeight: 128 
@@ -42,14 +43,9 @@ class Moor extends Phaser.Scene {
             this.handleClick(pointer);
         }, this);
 
-        // Background
-        this.background = this.add.image(0, 0, "background");
-        this.background.setOrigin(0, 0);
+        this.background = new Level(this, "background", 0);
 
-        // Bushes overlay
-        this.bushes = this.add.image(0, 0, "bushes");
-        this.bushes.setOrigin(0, 0);
-        this.bushes.setDepth(5);
+        this.bushes = new Level(this, "bushes", 5);
 
         this.car = new Car(this, shapes.carBody);
 
