@@ -44,13 +44,7 @@ class Moor extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight, "background");
         this.background.setOrigin(0, 0);
 
-
-
-        /*  this.car = this.matter.add.image(500, 500, "car");
-         this.car.setBody(shapes.carBody);
-         this.car.setOrigin(0.49, 0.62);
-         this.car.setDepth(2);
-         this.car.setScale(0.4, 0.4); */
+        this.car = new Car(this, shapes.carBody);
 
         // Sprites
         this.player = this.matter.add.sprite(0, 0, "player");
@@ -84,16 +78,8 @@ class Moor extends Phaser.Scene {
     
         }); */
 
-        this.car = new Car(this, shapes.carBody);
         
-       /*  this.car = new Car ({
-            scene: this,
-            key: 'car',
-            x: 500,
-            y: 500
-          }); */
 
-        console.log(this.car);
 
     }
 
