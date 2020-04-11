@@ -5,13 +5,14 @@ class Moor extends Phaser.Scene {
     }
 
     sceneConfig = {
-        sceneWidth: 5000,
-        sceneHeight: 5000
+        sceneWidth: 3721,
+        sceneHeight: 2489
     }
 
     // Loads all assets before scene starts
     preload() {
-        this.load.image("background", "../../img/tilingGrass.png");
+        this.load.image("background", "../../img/moor_small.jpg");
+        this.load.image("bushes", "../../img/moor_bush_small.png");
         this.load.image("car", "../../img/car.png");
         this.load.image("hag", "../../img/hag.png")
         this.load.spritesheet("player", "../../img/player/playerSprites.png", {
@@ -42,8 +43,13 @@ class Moor extends Phaser.Scene {
         }, this);
 
         // Background
-        this.background = this.add.tileSprite(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight, "background");
+        this.background = this.add.image(0, 0, "background");
         this.background.setOrigin(0, 0);
+
+        // Bushes overlay
+        this.bushes = this.add.image(0, 0, "bushes");
+        this.bushes.setOrigin(0, 0);
+        this.bushes.setDepth(5);
 
         this.car = new Car(this, shapes.carBody);
 
