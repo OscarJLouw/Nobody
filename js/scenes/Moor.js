@@ -43,6 +43,7 @@ class Moor extends Phaser.Scene {
             this.handleClick(pointer);
         }, this);
 
+        //Game Components
         this.background = new Level(this, "background", 0);
 
         this.bushes = new Level(this, "bushes", 5);
@@ -52,14 +53,6 @@ class Moor extends Phaser.Scene {
         this.player = new Player(this, shapes.player);
 
         this.hag = new NPC(this, "hag", shapes.player);
-
-        /*this.npc01 = this.matter.add.sprite(0, 0, "npc01");
-        this.npc01.setBody(shapes.player);
-        this.npc01.setOrigin(0.5, 1);
-        this.npc01.setPosition(1200, 300);
-        this.npc01.targetPosition = new Phaser.Math.Vector2(200, 200);
-        this.npc01.setDepth(1);
-        this.npc01.setStatic(true);*/
 
         // Camera smooth following
         this.cameras.main.startFollow(this.player, false, 0.05, 0.05);
@@ -87,7 +80,6 @@ class Moor extends Phaser.Scene {
         this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
     }
 }
-
 
 /****** USEFUL FUNCTIONS ******/
 
