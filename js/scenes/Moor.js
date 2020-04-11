@@ -65,7 +65,8 @@ class Moor extends Phaser.Scene {
 
         this.player = new Player(this, shapes.player_body);
 
-        //this.hag = new NPC(this, "hag", shapes.player);
+        this.hag = new NPC(this, "hag", shapes.hag_body);
+        this.hag.setPosition(1800, 180);
 
         // Camera smooth following
         this.cameras.main.startFollow(this.player, false, 0.05, 0.05);
