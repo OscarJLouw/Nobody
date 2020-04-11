@@ -1,29 +1,5 @@
 {
 	"generator_info": "Shape definitions generated with PhysicsEditor. Visit https://www.codeandweb.com/physicseditor",
-	"player_body": {
-		"type": "fromPhysicsEditor",
-		"label": "player_body",
-		"isStatic": false,
-		"density": 0.10000000149011612,
-		"restitution": 0,
-		"friction": 0.10000000149011612,
-		"frictionAir": 0.009999999776482582,
-		"frictionStatic": 0.5,
-		"collisionFilter": {
-			"group": 0,
-			"category": 1,
-			"mask": 255
-		},
-		"fixtures": [
-			{
-				"label": "",
-				"isSensor": false,
-				"vertices": [
-					[ { "x":277, "y":289 }, { "x":277, "y":281 }, { "x":231, "y":281 }, { "x":231, "y":289 } ]
-				]
-			}
-		]
-	},
 	"bush_body": {
 		"type": "fromPhysicsEditor",
 		"label": "moor_bush",
@@ -166,6 +142,30 @@
 				"isSensor": false,
 				"vertices": [
 					[ { "x":1839, "y":-55 }, { "x":1875, "y":163 }, { "x":3760, "y":168 }, { "x":3746, "y":-48 } ]
+				]
+			}
+		]
+	},
+	"player_body": {
+		"type": "fromPhysicsEditor",
+		"label": "player_body",
+		"isStatic": false,
+		"density": 0.10000000149011612,
+		"restitution": 0,
+		"friction": 0.10000000149011612,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":89, "y":131 }, { "x":89, "y":123 }, { "x":43, "y":123 }, { "x":43, "y":131 } ]
 				]
 			}
 		]
