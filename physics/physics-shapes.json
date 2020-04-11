@@ -24,7 +24,7 @@
 			}
 		]
 	},
-	"moor_bush": {
+	"moor_bush_small": {
 		"type": "fromPhysicsEditor",
 		"label": "moor_bush",
 		"isStatic": true,
@@ -94,6 +94,30 @@
 		"type": "fromPhysicsEditor",
 		"label": "carBody",
 		"isStatic": true,
+		"density": 0.1,
+		"restitution": 0,
+		"friction": 0.1,
+		"frictionAir": 0.01,
+		"frictionStatic": 0.5,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":91, "y":931 }, { "x":408, "y":1029 }, { "x":644, "y":1008 }, { "x":1040, "y":773 }, { "x":1288, "y":506 }, { "x":1278, "y":377 }, { "x":704, "y":383 }, { "x":18, "y":803 } ]
+				]
+			}
+		]
+	},
+	"hag": {
+		"type": "fromPhysicsEditor",
+		"label": "hag",
+		"isStatic": true,
 		"density": 0.10000000149011612,
 		"restitution": 0,
 		"friction": 0.10000000149011612,
@@ -109,7 +133,8 @@
 				"label": "",
 				"isSensor": false,
 				"vertices": [
-					[ { "x":91, "y":931 }, { "x":408, "y":1029 }, { "x":644, "y":1008 }, { "x":1040, "y":773 }, { "x":1288, "y":506 }, { "x":1278, "y":377 }, { "x":704, "y":383 }, { "x":18, "y":803 } ]
+					[ { "x":75, "y":20 }, { "x":17, "y":728 }, { "x":463, "y":843 }, { "x":755, "y":380 }, { "x":617, "y":19 } ],
+					[ { "x":744, "y":728 }, { "x":755, "y":380 }, { "x":463, "y":843 } ]
 				]
 			}
 		]
