@@ -64,7 +64,6 @@ class Moor extends Phaser.Scene {
         this.bushes.y = this.sceneConfig.sceneHeight/2 + 675;
         //this.bushes.setOrigin(0, 0);
         this.bushes.setDepth(5);
-        
 
         this.fence = new Level(this, "fence", 0);
 
@@ -114,6 +113,10 @@ class Moor extends Phaser.Scene {
             emitZone: { type: 'random', source: emissionCircle2 },
             maxParticles: 200,
             particleClass: FireflyParticles
+        });
+
+        this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
+            console.log('!collision');
         });
     }
 
