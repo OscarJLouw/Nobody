@@ -16,6 +16,20 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.setDepth(1);
         this.targetPosition = new Phaser.Math.Vector2(x, y);
     }
+
+    handleCollision()
+    {
+        console.log("handleColiision");
+
+        this.on('collisionstart', function (event, bodyA, bodyB) {
+            console.log('collision');
+            this.test();
+        });
+    }
+
+    test() {
+        console.log("&&&&&&&&&&");
+    }
     
     movePlayer(moveSpeed) {
         var currentPosition = new Phaser.Math.Vector2(this.x, this.y);

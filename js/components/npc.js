@@ -17,4 +17,14 @@ class NPC extends Phaser.Physics.Matter.Sprite {
         this.setDepth(1);
         this.setStatic(true);
     }
+
+    handleEvents()
+    {
+        this.setInteractive();
+
+        this.on('pointerdown', function(pointer) {
+            //console.log("#####(((/((");
+         });
+    }
+
 }
