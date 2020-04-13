@@ -112,7 +112,7 @@ class Moor extends Phaser.Scene {
         });
 
         //Collision checkers
-        this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
+        this.matter.world.on('collisionactive', function (event, bodyA, bodyB) {
             if(typeof bodyA.gameObject.handleCollision === 'function'){
                 bodyA.gameObject.handleCollision(event, bodyB);
             }
