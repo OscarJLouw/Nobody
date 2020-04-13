@@ -17,12 +17,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.targetPosition = new Phaser.Math.Vector2(x, y);
     }
 
-    handleCollision()
+    handleCollision(event, body)
     {
-        console.log('collision');
-       this.on('collisionstart', function (event, bodyA, bodyB) {
-            console.log('collision');
-        });
+        console.log(event);
+        console.log(body);
     }
     
     movePlayer(moveSpeed) {

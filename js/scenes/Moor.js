@@ -111,18 +111,20 @@ class Moor extends Phaser.Scene {
             particleClass: FireflyParticles
         });
 
+        //Collision checkers
         this.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
             if(typeof bodyA.gameObject.handleCollision === 'function'){
-                bodyA.gameObject.handleCollision();
+                bodyA.gameObject.handleCollision(event, bodyB);
             }
             if(typeof bodyB.gameObject.handleCollision === 'function'){
-                bodyB.gameObject.handleCollision();
+                bodyB.gameObject.handleCollision(event, bodyA);
             }
         });
     }
 
     update(time, delta) {
 
+        //Debug panel
         if(debug == true){
             if(this.debugPannel == null){
                 this.debugPannel = document.getElementById("debugPannel");
