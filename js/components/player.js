@@ -19,6 +19,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
     handleCollision()
     {
+        console.log('collision');
        this.on('collisionstart', function (event, bodyA, bodyB) {
             console.log('collision');
         });

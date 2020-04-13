@@ -26,5 +26,4 @@ class NPC extends Phaser.Physics.Matter.Sprite {
             //console.log("#####(((/((");
          });
     }
-
 }
