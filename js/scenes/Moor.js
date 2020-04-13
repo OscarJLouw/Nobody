@@ -8,6 +8,8 @@ class Moor extends Phaser.Scene {
         sceneWidth: 3721,
         sceneHeight: 2489
     }
+    
+    
 
     // Loads all assets before scene starts
     preload() {
@@ -27,7 +29,12 @@ class Moor extends Phaser.Scene {
             frameHeight: 128 
         });
 
-        // Load body shapes from JSON file generated using PhysicsEditor
+
+        // Particles
+        this.load.image("firefly", "../../img/firefly.png");
+
+
+        // Load Physics body shapes from JSON file generated using PhysicsEditor
         this.load.json('shapes', '../../physics/physics-shapes.json');
     }
 
@@ -73,9 +80,55 @@ class Moor extends Phaser.Scene {
 
         // Physics
         this.matter.world.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
+
+        // Particle systems
+        this.fireflyParticles = this.add.particles("firefly");
+        var emissionCircle = new Phaser.Geom.Circle(0, 0, 1500);
+        var emissionCircle2 = new Phaser.Geom.Circle(0, 0, 300);
+
+        this.fireflyParticles.createEmitter({
+            x: this.sceneConfig.sceneWidth/2,
+            y: this.sceneConfig.sceneHeight/2,
+            lifespan: 10000,
+            //speed: { min: Math.random()*10, max: Math.random()*20 },
+            gravityY: 0,
+            scale: { start: 0, end: .5 },
+            blendMode: 'ADD',
+            quantity: 1,
+            frequency: 50,
+            emitZone: { type: 'random', source: emissionCircle },
+            maxParticles: 300,
+            particleClass: FireflyParticles
+        });
+
+        this.fireflyParticles.createEmitter({
+            x: this.sceneConfig.sceneWidth/2+200,
+            y: this.sceneConfig.sceneHeight - 800,
+            lifespan: 10000,
+            //speed: { min: Math.random()*10, max: Math.random()*20 },
+            gravityY: 0,
+            scale: { start: 0, end: .5 },
+            blendMode: 'ADD',
+            quantity: 1,
+            frequency: 50,
+            emitZone: { type: 'random', source: emissionCircle2 },
+            maxParticles: 200,
+            particleClass: FireflyParticles
+        });
     }
 
     update(time, delta) {
+        
+
+        if(debug == true){
+            if(this.debugPannel == null){
+                this.debugPannel = document.getElementById("debugPannel");
+            }
+
+            this.debugPannel.innerHTML = "<b>DEBUG</b> <br>Player X Position: " + Math.round(this.player.x) + "<br>Player Y Position: " + Math.round(this.player.y);
+
+        }
+
         //this.movePlayer(.3 * delta);
 
         this.player.movePlayer(.3 * delta);

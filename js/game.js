@@ -1,3 +1,5 @@
+var debug = false;
+
 // Game configuration
 var config = {
     type: Phaser.CANVAS,
@@ -12,12 +14,6 @@ var config = {
         default: 'matter',
         matter: {
             
-            debug: {
-                renderFill: false,
-                showInternalEdges: true,
-                showConvexHulls: true
-            },
-            
             gravity: {
                 x: 0,
                 y: 0
@@ -25,6 +21,46 @@ var config = {
         }
     },
     scene: [BootGame, Moor] // list of scenes in the project
+}
+
+const debugOverlay = document.createElement('div');
+
+debugOverlay.className = 'debug';
+debugOverlay.id = 'debugPannel';
+debugOverlay.innerHTML = 'DEBUG PANNEL';
+
+var gameContainer = document.getElementById("phaser-game");
+document.getElementById("content").insertBefore(debugOverlay, gameContainer);
+
+if(debug == true){
+    config.physics.matter.debug = {
+        renderFill: false,
+        showInternalEdges: true,
+        showConvexHulls: true
+    };
+} else {
+    disableDebug();
+}
+
+function enableDebug(){
+    document.getElementById("debugPannel").style = "display:block";
+}
+
+function disableDebug(){
+    document.getElementById("debugPannel").style = "display:none";
+}
+
+
+window.onkeyup = function(e){
+    if(e.keyCode === 32 || e.key === ' '){
+        debug = !debug;
+
+        if(debug == true){
+            enableDebug();
+        } else {
+            disableDebug();
+        }
+    }
 }
 
 // Create the game
