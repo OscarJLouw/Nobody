@@ -8,8 +8,6 @@ class Moor extends Phaser.Scene {
         sceneWidth: 3721,
         sceneHeight: 2489
     }
-    
-    
 
     // Loads all assets before scene starts
     preload() {
@@ -89,7 +87,6 @@ class Moor extends Phaser.Scene {
             x: this.sceneConfig.sceneWidth/2,
             y: this.sceneConfig.sceneHeight/2,
             lifespan: 10000,
-            //speed: { min: Math.random()*10, max: Math.random()*20 },
             gravityY: 0,
             scale: { start: 0, end: .5 },
             blendMode: 'ADD',
@@ -97,14 +94,13 @@ class Moor extends Phaser.Scene {
             frequency: 50,
             emitZone: { type: 'random', source: emissionCircle },
             maxParticles: 300,
-            particleClass: FireflyParticles
+            particleClass: FireflyParticles // custom particle class definition in js/components/fireflyParticles.js
         });
 
         this.fireflyParticles.createEmitter({
             x: this.sceneConfig.sceneWidth/2+200,
             y: this.sceneConfig.sceneHeight - 800,
             lifespan: 10000,
-            //speed: { min: Math.random()*10, max: Math.random()*20 },
             gravityY: 0,
             scale: { start: 0, end: .5 },
             blendMode: 'ADD',
@@ -121,7 +117,6 @@ class Moor extends Phaser.Scene {
     }
 
     update(time, delta) {
-        
 
         if(debug == true){
             if(this.debugPannel == null){
@@ -131,8 +126,6 @@ class Moor extends Phaser.Scene {
             this.debugPannel.innerHTML = "<b>DEBUG</b> <br>Player X Position: " + Math.round(this.player.x) + "<br>Player Y Position: " + Math.round(this.player.y);
 
         }
-
-        //this.movePlayer(.3 * delta);
 
         this.player.movePlayer(.3 * delta);
 
@@ -154,7 +147,6 @@ class Moor extends Phaser.Scene {
 /****** USEFUL FUNCTIONS ******/
 
 /*
-
 var randomX = Phaser.Math.Between(0, config.width);
 
 this.add.text(20, 20, "Text goes here", {
