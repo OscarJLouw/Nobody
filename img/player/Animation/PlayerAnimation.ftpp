@@ -2,7 +2,7 @@
   "meta": {
     "version": "0.6.5"
   },
-  "savePath": "",
+  "savePath": "D:\\LITTLEFOOTPRINT\\Git\\Nobody\\img\\player\\Animation",
   "images": [],
   "folders": [
     "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/front",
@@ -22,7 +22,7 @@
     "filter": "none",
     "exporter": "Phaser 3",
     "fileName": "pack-result",
-    "savePath": "",
+    "savePath": "D:\\LITTLEFOOTPRINT\\Git\\Nobody\\img\\player\\Animation",
     "width": 2048,
     "height": 2048,
     "fixedSize": false,

@@ -2,8 +2,8 @@ class Car extends Phaser.Physics.Matter.Sprite {
     constructor(scene, shape) {
 
         //car position on the screen
-        var x = 500;
-        var y = 500;
+        var x = 2700;
+        var y = 1000;
        
         //add car on the screen
         super(scene.matter.world, x, y, "car");
