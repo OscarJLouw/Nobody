@@ -11,12 +11,13 @@ class Moor extends Phaser.Scene {
 
     // Loads all assets before scene starts
     preload() {
-        this.load.image("background", "../../img/moor_small.jpg");
+        this.load.image("background", "../../img/moor_tiny.jpg");
         this.load.image("bushes", "../../img/moor_bush_small.png");
         this.load.image("fence", "../../img/fence.png");
         this.load.image("car", "../../img/Objects/car.png");
         this.load.image("hag", "../../img/Objects/hag.png");
         this.load.image("detail", "../../img/Objects/detail.png");
+        this.load.image("journal", "../../img/Objects/journal.png");
 
         //this.load.atlas('player', '../../img/player/Animation/PlayerAnimation.png', '../../img/player/Animation/PlayerAnimation.json');
         
@@ -76,6 +77,12 @@ class Moor extends Phaser.Scene {
         //this.bushes.setOrigin(0, 0);
         this.detail.setDepth(6);
         
+        this.journal = this.add.image(0, 0, "journal");
+        this.journal.x = 810;
+        this.journal.y = 630;
+        this.journal.setScale(0.3);
+        //this.bushes.setOrigin(0, 0);
+        this.journal.setDepth(6);
 
         this.fence = new Level(this, "fence", 0);
 
