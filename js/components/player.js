@@ -1,6 +1,5 @@
 class Player extends Phaser.Physics.Matter.Sprite {
     constructor(scene, shape) {
-
         //player position on the screen
         var x = 1860;
         var y = 1340;
@@ -14,16 +13,35 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.setPosition(x, y);
         this.setOrigin(0.5, 1);
         this.setDepth(1);
+        this.setScale(0.5);
+        
         this.targetPosition = new Phaser.Math.Vector2(x, y);
+
+        this.separationPenetration = null;
+
+        this.animationFrameRate = 100; // miliseconds
+        this.animationTimer = 0;
+        this.currentFrame = 0;
+        this.idleFrames = [2,3]; //forward, right
+        this.walkSideFrames = [5,9,13,6,7];
+        this.walkForwardFrames = [0,4,8,12,2];
+
+        this.lastWalkDirection = "Down";
+        this.idle = true;
     }
 
-    handleCollision(event, body)
+    handleCollision(collisionPairs, otherBody)
     {
-        console.log(event);
-        console.log(body);
+        var collision = collisionPairs[0].collision;
+        this.separationPenetration = collision.penetration;
+        
+        if(collision.bodyA.id == "51"){
+            this.separationPenetration.x = -collision.penetration.x;
+            this.separationPenetration.y = -collision.penetration.y;
+        }
     }
     
-    movePlayer(moveSpeed) {
+    movePlayer(moveSpeed, deltaTime) {
         var currentPosition = new Phaser.Math.Vector2(this.x, this.y);
         var moveDirection = new Phaser.Math.Vector2(currentPosition.x, currentPosition.y);
 
@@ -34,32 +52,93 @@ class Player extends Phaser.Physics.Matter.Sprite {
             moveDirection.normalize();
             moveDirection.scale(moveSpeed);
         }
+        
+        var updateFrame = false;
 
         if (length < 0.2) {
             // idle
-            this.setFrame(1);
+            this.idle = true;
+
+            if(this.lastWalkDirection == "Down") {
+                this.setFrame(this.idleFrames[0]);
+            } else if(this.lastWalkDirection == "Up") {
+                this.setFrame(this.idleFrames[0]);
+            } else if(this.lastWalkDirection == "Left") {
+                this.setFrame(this.idleFrames[1]);
+            } else if(this.lastWalkDirection == "Right") {
+                this.setFrame(this.idleFrames[1]);
+            }
         } else {
+            if(this.idle == true){
+                this.idle = false;
+                updateFrame = true;
+                this.animationTimer = 0;    
+            } else {
+                this.animationTimer += deltaTime;
+                if(this.animationTimer > this.animationFrameRate){
+                    this.animationTimer -= this.animationFrameRate;
+                    updateFrame = true;
+                }
+            }
+
             if (Math.abs(moveDirection.x) > Math.abs(moveDirection.y)) {
+                if(updateFrame){
+                    var currentFrameIndex = this.walkSideFrames.indexOf(this.currentFrame);
+                    if(currentFrameIndex != -1){
+                        currentFrameIndex ++;
+                        if(currentFrameIndex >= this.walkSideFrames.length)
+                            currentFrameIndex = 0;
+
+                        this.currentFrame = this.walkSideFrames[currentFrameIndex];
+
+                    } else {
+                        this.currentFrame = this.walkSideFrames[0];
+                    }
+                }
+
                 if (moveDirection.x < 0) {
                     // right
-                    this.setFrame(3);
+                    this.lastWalkDirection = "Right";
+                    this.flipX = false;
                 } else if (moveDirection.x > 0) {
                     // left
-                    this.setFrame(2);
+                    this.lastWalkDirection = "Left";
+                    this.flipX = true;
                 }
             } else {
                 if (moveDirection.y < 0) {
                     // down
-                    this.setFrame(1);
+                    this.lastWalkDirection = "Down";
+
+                    if(updateFrame){
+                        var currentFrameIndex = this.walkForwardFrames.indexOf(this.currentFrame);
+                        if(currentFrameIndex != -1){
+                            currentFrameIndex ++;
+                            if(currentFrameIndex >= this.walkForwardFrames.length)
+                                currentFrameIndex = 0;
+    
+                            this.currentFrame = this.walkForwardFrames[currentFrameIndex];
+                        } else {
+                            this.currentFrame = this.walkForwardFrames[0];
+                        }
+                    }
                 } else if (moveDirection.y > 0) {
                     // up
-                    this.setFrame(0);
+                    this.lastWalkDirection = "Up";
                 }
             }
+            this.setFrame(this.currentFrame);
         }
 
         //console.log(-moveDirection.x + " ### " + -moveDirection.y);
         //var newPosition = currentPosition.subtract(moveDirection);
+
+        if(this.separationPenetration != null){
+            moveDirection.add(this.separationPenetration);
+
+            this.separationPenetration = null;
+        }
+
         this.setVelocity(-moveDirection.x, -moveDirection.y);
         this.setAngle(0);
     }

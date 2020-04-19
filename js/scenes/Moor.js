@@ -17,16 +17,21 @@ class Moor extends Phaser.Scene {
         this.load.image("car", "../../img/car.png");
         this.load.image("hag", "../../img/hag.png");
 
-        this.load.spritesheet("player", "../../img/player/playerSprites.png", {
-            frameWidth: 128, 
-            frameHeight: 128 
+        //this.load.atlas('player', '../../img/player/Animation/PlayerAnimation.png', '../../img/player/Animation/PlayerAnimation.json');
+        
+        this.load.spritesheet("player", "../../img/player/Animation/PlayerAnimation.png", {
+            frameWidth: 256, 
+            frameHeight: 256 
         });
 
+        this.load.animation("playerAnimations", "../../img/player/Animation/PlayerAnimation.json");
+
+        /*
         this.load.spritesheet("npc01", "../../img/player/playerSprites.png", {
             frameWidth: 128, 
             frameHeight: 128 
         });
-
+        */
 
         // Particles
         this.load.image("firefly", "../../img/firefly.png");
@@ -114,16 +119,16 @@ class Moor extends Phaser.Scene {
         //Collision checkers
         this.matter.world.on('collisionactive', function (event, bodyA, bodyB) {
             if(typeof bodyA.gameObject.handleCollision === 'function'){
-                bodyA.gameObject.handleCollision(event, bodyB);
+                bodyA.gameObject.handleCollision(event.pairs, bodyB);
             }
             if(typeof bodyB.gameObject.handleCollision === 'function'){
-                bodyB.gameObject.handleCollision(event, bodyA);
+                bodyB.gameObject.handleCollision(event.pairs, bodyA);
             }
         });
+
     }
 
     update(time, delta) {
-
         //Debug panel
         if(debug == true){
             if(this.debugPannel == null){
@@ -134,7 +139,7 @@ class Moor extends Phaser.Scene {
 
         }
 
-        this.player.movePlayer(.3 * delta);
+        this.player.movePlayer(.2 * delta, delta);
 
         //Change the layer depth of car and player
         if (this.player.y > this.car.y) {

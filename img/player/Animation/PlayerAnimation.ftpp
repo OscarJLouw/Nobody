@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "version": "0.6.5"
+  },
+  "savePath": "",
+  "images": [],
+  "folders": [
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/front",
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/idle",
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/side"
+  ],
+  "packOptions": {
+    "textureName": "PlayerAnimation",
+    "textureFormat": "png",
+    "removeFileExtension": true,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 0.5,
+    "disableSmoothing": false,
+    "filter": "none",
+    "exporter": "Phaser 3",
+    "fileName": "pack-result",
+    "savePath": "",
+    "width": 2048,
+    "height": 2048,
+    "fixedSize": false,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": false,
+    "allowTrim": false,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": false,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}
