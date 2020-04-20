@@ -46,11 +46,14 @@ class Moor extends Phaser.Scene {
 
         // Load Physics body shapes from JSON file generated using PhysicsEditor
         this.load.json('shapes', '../../physics/physics-shapes.json');
+
+        this.comicManager = new ComicManager(this);
+        this.comicManager.loadComics(this);
     }
 
     // Called when scene is loaded
     create() {
-        this.comicManager = new ComicManager(this);
+        
 
         // Camera
         this.cameras.main.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
@@ -160,6 +163,8 @@ class Moor extends Phaser.Scene {
             }
         });
 
+        this.comicManager.startComic("Introduction");
+        
     }
 
     update(time, delta) {
@@ -173,7 +178,8 @@ class Moor extends Phaser.Scene {
 
         }
 
-        this.player.movePlayer(.2 * delta, delta);
+        if(this.comicManager.currentlyInComic != true)
+            this.player.movePlayer(.2 * delta, delta);
 
         //Change the layer depth of car and player
         /*
@@ -188,7 +194,13 @@ class Moor extends Phaser.Scene {
     }
 
     handleClick(pointer) {
-        this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
+        if(this.comicManager.currentlyInComic)
+        {
+            this.comicManager.nextPannel();
+            this.player.targetPosition = new Phaser.Math.Vector2(this.player.x, this.player.y);
+        } else {
+            this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
+        }
     }
 }
 
