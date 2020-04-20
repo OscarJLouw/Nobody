@@ -10,6 +10,7 @@ var config = {
         width: '100%',
         height: '100%'
     },
+    roundPixels: false,
     physics: {
         default: 'matter',
         matter: {

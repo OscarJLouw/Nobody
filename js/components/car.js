@@ -13,7 +13,7 @@ class Car extends Phaser.Physics.Matter.Sprite {
         this.setBody(shape);
         this.setScale(0.4, 0.4);
         this.setOrigin(0.49, 0.62);
-        this.setDepth(2);
+        this.setDepth(y);
         this.setStatic(true); 
     }
 }

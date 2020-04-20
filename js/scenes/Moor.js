@@ -18,6 +18,11 @@ class Moor extends Phaser.Scene {
         this.load.image("hag", "../../img/Objects/hag.png");
         this.load.image("detail", "../../img/Objects/detail.png");
         this.load.image("journal", "../../img/Objects/journal.png");
+        this.load.image("brush1", "../../img/Objects/brush1.png");
+        this.load.image("brush2", "../../img/Objects/brush2.png");
+        this.load.image("brush3", "../../img/Objects/brush3.png");
+
+        this.brushes = ["brush1", "brush2", "brush3"];
 
         //this.load.atlas('player', '../../img/player/Animation/PlayerAnimation.png', '../../img/player/Animation/PlayerAnimation.json');
         
@@ -45,6 +50,8 @@ class Moor extends Phaser.Scene {
 
     // Called when scene is loaded
     create() {
+        this.comicManager = new ComicManager(this);
+
         // Camera
         this.cameras.main.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
 
@@ -60,41 +67,52 @@ class Moor extends Phaser.Scene {
         this.background = new Level(this, "background", 0);
 
         // Bushes overlay
-        
-        //var bushBody = this.matter.bodies.fromVertices(shapes.moor_bush.vertices);
         this.bushes = this.matter.add.image(0, 0, "bushes");
         this.bushes.setBody(shapes.bush_body);
         this.bushes.setStatic(true);
         this.bushes.x = this.sceneConfig.sceneWidth/2 + 130;
         this.bushes.y = this.sceneConfig.sceneHeight/2 + 675;
-        //this.bushes.setOrigin(0, 0);
-        this.bushes.setDepth(5);
+        this.bushes.setDepth(5000);
 
-        //var bushBody = this.matter.bodies.fromVertices(shapes.moor_bush.vertices);
+        // Detail objects
         this.detail = this.add.image(0, 0, "detail");
         this.detail.x = this.sceneConfig.sceneWidth/2;
         this.detail.y = this.sceneConfig.sceneHeight/2;
-        //this.bushes.setOrigin(0, 0);
         this.detail.setDepth(6);
         
+        // Journal
         this.journal = this.add.image(0, 0, "journal");
         this.journal.x = 810;
         this.journal.y = 630;
         this.journal.setScale(0.3);
-        //this.bushes.setOrigin(0, 0);
-        this.journal.setDepth(6);
+        this.journal.setDepth(this.journal.y);
 
+        // Brush
+        for(var i = 0; i<50; i++){
+            var brushName = this.brushes[Math.floor(Math.random() * 3)];
+            var brush = this.add.image(Math.random() * this.sceneConfig.sceneWidth, Math.random() * this.sceneConfig.sceneHeight, brushName);
+            
+            brush.setScale(Math.random() * 0.25 + 0.5);
+
+            brush.setDepth(Math.floor(brush.y + brush.scale*30));
+        }
+
+        // Fence
         this.fence = new Level(this, "fence", 0);
 
+        // Car
         this.car = new Car(this, shapes.car_body);
 
+        // Player
         this.player = new Player(this, shapes.player_body);
 
         this.hag = new NPC(this, "hag", shapes.hag_body);
         this.hag.setPosition(1800, 180);
 
         // Camera smooth following
-        this.cameras.main.startFollow(this.player, false, 0.05, 0.05);
+        this.cameras.main.startFollow(this.player, false);//, 0.05, 0.05);
+        this.cameras.main.roundPx = false;
+        this.cameras.main.setRoundPixels(false);
 
         // Physics
         this.matter.world.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
@@ -158,6 +176,7 @@ class Moor extends Phaser.Scene {
         this.player.movePlayer(.2 * delta, delta);
 
         //Change the layer depth of car and player
+        /*
         if (this.player.y > this.car.y) {
             this.player.setDepth(2);
             this.car.setDepth(1);
@@ -165,6 +184,7 @@ class Moor extends Phaser.Scene {
             this.player.setDepth(1);
             this.car.setDepth(2);
         }
+        */
     }
 
     handleClick(pointer) {

@@ -12,7 +12,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.setBody(shape);
         this.setPosition(x, y);
         this.setOrigin(0.5, 1);
-        this.setDepth(1);
+        this.setDepth(y);
         this.setScale(0.5);
         
         this.targetPosition = new Phaser.Math.Vector2(x, y);
@@ -55,7 +55,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
         
         var updateFrame = false;
 
-        if (length < 0.2) {
+        if (length < 1) {
             // idle
             this.idle = true;
 
@@ -82,6 +82,8 @@ class Player extends Phaser.Physics.Matter.Sprite {
             }
 
             if (Math.abs(moveDirection.x) > Math.abs(moveDirection.y)) {
+                this.animationFrameRate = 68;
+
                 if(updateFrame){
                     var currentFrameIndex = this.walkSideFrames.indexOf(this.currentFrame);
                     if(currentFrameIndex != -1){
@@ -106,6 +108,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
                     this.flipX = true;
                 }
             } else {
+                this.animationFrameRate = 136;
                 if (moveDirection.y < 0) {
                     // down
                     this.lastWalkDirection = "Down";
@@ -141,5 +144,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
         this.setVelocity(-moveDirection.x, -moveDirection.y);
         this.setAngle(0);
+
+        this.setDepth(Math.floor(this.y));
     }
 }
