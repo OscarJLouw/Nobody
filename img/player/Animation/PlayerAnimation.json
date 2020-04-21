@@ -4,13 +4,13 @@
 			"image": "PlayerAnimation.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 1024,
+				"w": 1280,
 				"h": 1024
 			},
 			"scale": 0.5,
 			"frames": [
 				{
-					"filename": "front/Front1",
+					"filename": "back/Back1",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -31,7 +31,7 @@
 					}
 				},
 				{
-					"filename": "front/Front2",
+					"filename": "back/Back2",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -52,7 +52,7 @@
 					}
 				},
 				{
-					"filename": "front/Front3",
+					"filename": "back/Back3",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -73,7 +73,7 @@
 					}
 				},
 				{
-					"filename": "front/Front4",
+					"filename": "back/Back4",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -94,7 +94,7 @@
 					}
 				},
 				{
-					"filename": "front/Front5",
+					"filename": "back/Back5",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -109,6 +109,132 @@
 					},
 					"frame": {
 						"x": 256,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					}
+				},
+				{
+					"filename": "front/Front1",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					},
+					"frame": {
+						"x": 256,
+						"y": 256,
+						"w": 256,
+						"h": 256
+					}
+				},
+				{
+					"filename": "front/Front2",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					},
+					"frame": {
+						"x": 256,
+						"y": 512,
+						"w": 256,
+						"h": 256
+					}
+				},
+				{
+					"filename": "front/Front3",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					},
+					"frame": {
+						"x": 256,
+						"y": 768,
+						"w": 256,
+						"h": 256
+					}
+				},
+				{
+					"filename": "front/Front4",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					},
+					"frame": {
+						"x": 512,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					}
+				},
+				{
+					"filename": "front/Front5",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					},
+					"frame": {
+						"x": 768,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					}
+				},
+				{
+					"filename": "idle/IdleBack",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 256,
+						"h": 256
+					},
+					"frame": {
+						"x": 1024,
 						"y": 0,
 						"w": 256,
 						"h": 256
@@ -130,7 +256,7 @@
 					},
 					"frame": {
 						"x": 512,
-						"y": 0,
+						"y": 256,
 						"w": 256,
 						"h": 256
 					}
@@ -150,8 +276,8 @@
 						"h": 256
 					},
 					"frame": {
-						"x": 768,
-						"y": 0,
+						"x": 512,
+						"y": 512,
 						"w": 256,
 						"h": 256
 					}
@@ -171,8 +297,8 @@
 						"h": 256
 					},
 					"frame": {
-						"x": 256,
-						"y": 256,
+						"x": 512,
+						"y": 768,
 						"w": 256,
 						"h": 256
 					}
@@ -192,8 +318,8 @@
 						"h": 256
 					},
 					"frame": {
-						"x": 256,
-						"y": 512,
+						"x": 768,
+						"y": 256,
 						"w": 256,
 						"h": 256
 					}
@@ -213,8 +339,8 @@
 						"h": 256
 					},
 					"frame": {
-						"x": 256,
-						"y": 768,
+						"x": 1024,
+						"y": 256,
 						"w": 256,
 						"h": 256
 					}
@@ -234,8 +360,8 @@
 						"h": 256
 					},
 					"frame": {
-						"x": 512,
-						"y": 256,
+						"x": 768,
+						"y": 512,
 						"w": 256,
 						"h": 256
 					}
@@ -256,7 +382,7 @@
 					},
 					"frame": {
 						"x": 768,
-						"y": 256,
+						"y": 768,
 						"w": 256,
 						"h": 256
 					}

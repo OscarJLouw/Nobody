@@ -22,9 +22,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.animationFrameRate = 100; // miliseconds
         this.animationTimer = 0;
         this.currentFrame = 0;
-        this.idleFrames = [2,3]; //forward, right
-        this.walkSideFrames = [5,9,13,6,7];
-        this.walkForwardFrames = [0,4,8,12,2];
+        this.idleFrames = [7,12,4]; //forward, right, back
+        this.walkSideFrames = [17,8,9,13,18];
+        this.walkForwardFrames = [6,11,16,2,3];
+        this.walkBackwardFrames = [0,5,10,15,1];
 
         this.lastWalkDirection = "Down";
         this.idle = true;
@@ -62,7 +63,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
             if(this.lastWalkDirection == "Down") {
                 this.setFrame(this.idleFrames[0]);
             } else if(this.lastWalkDirection == "Up") {
-                this.setFrame(this.idleFrames[0]);
+                this.setFrame(this.idleFrames[2]);
             } else if(this.lastWalkDirection == "Left") {
                 this.setFrame(this.idleFrames[1]);
             } else if(this.lastWalkDirection == "Right") {
@@ -128,6 +129,19 @@ class Player extends Phaser.Physics.Matter.Sprite {
                 } else if (moveDirection.y > 0) {
                     // up
                     this.lastWalkDirection = "Up";
+
+                    if(updateFrame){
+                        var currentFrameIndex = this.walkBackwardFrames.indexOf(this.currentFrame);
+                        if(currentFrameIndex != -1){
+                            currentFrameIndex ++;
+                            if(currentFrameIndex >= this.walkBackwardFrames.length)
+                                currentFrameIndex = 0;
+    
+                            this.currentFrame = this.walkBackwardFrames[currentFrameIndex];
+                        } else {
+                            this.currentFrame = this.walkBackwardFrames[0];
+                        }
+                    }
                 }
             }
             this.setFrame(this.currentFrame);

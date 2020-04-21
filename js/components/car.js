@@ -30,7 +30,7 @@ class Car extends Phaser.Physics.Matter.Sprite {
     handleCollision(collisionPairs, otherBody)
     {
         if(this.clicked == true && !this.scene.comicManager.currentlyInComic){
-            this.scene.comicManager.startComic("Introduction");
+            this.scene.comicManager.startComic("Car");
             this.clicked = false;
         }
     }

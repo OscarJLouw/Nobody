@@ -35,6 +35,12 @@ class ComicManager {
                     {name:"Intro_1", next:"Intro_2"},
                     {name:"Intro_2", next:"none"}
                 ]
+            },
+            {
+                comicName: "Car",
+                pages: [
+                    {name:"Intro_2", next:"none"}
+                ]
             }
         ]
     }
@@ -53,8 +59,10 @@ class ComicManager {
         this.currentPageIndex = 0;
         this.currentPage = this.pageList.find(x => x.pageName === this.currentComic.pages[0].name);
         this.currentPannelIndex = 0;
-        
+
         if(comicName != "Introduction"){
+            this.scene.overlay.visible = true;
+
             this.scene.tweens.add({
                 targets: this.scene.overlay,
                 alpha: 0.8,
@@ -143,14 +151,20 @@ class ComicManager {
                     targets: this.scene.overlay,
                     alpha: 0,
                     duration: 1000,
-                    ease: 'Power2'
+                    ease: 'Power2',
+                    onComplete: function(){
+                        this.visible = false;
+                    }
                 });
             } else {
                 this.scene.tweens.add({
                     targets: this.scene.overlay,
                     alpha: 0,
                     duration: 3000,
-                    ease: 'Power2'
+                    ease: 'Power2',
+                    onComplete: function(){
+                        this.visible = false;
+                    }
                 });
             }
 

@@ -5,6 +5,7 @@
   "savePath": "D:\\LITTLEFOOTPRINT\\Git\\Nobody\\img\\player\\Animation",
   "images": [],
   "folders": [
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/back",
     "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/front",
     "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/idle",
     "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/side"
@@ -23,9 +24,9 @@
     "exporter": "Phaser 3",
     "fileName": "pack-result",
     "savePath": "D:\\LITTLEFOOTPRINT\\Git\\Nobody\\img\\player\\Animation",
-    "width": 2048,
+    "width": 2560,
     "height": 2048,
-    "fixedSize": false,
+    "fixedSize": true,
     "powerOfTwo": false,
     "padding": 0,
     "extrude": 0,
