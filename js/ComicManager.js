@@ -81,45 +81,26 @@ class ComicManager {
             switch(pannelObject.direction){
                 case "up":
                     pannel.y = this.scene.cameras.main.displayHeight * 2;
-                    this.scene.tweens.add({
-                        targets: pannel,
-                        y: this.scene.cameras.main.centerY,
-                        duration: 1500,
-                        ease: 'Power2'
-                    });
                     break;
                 case "down":
                     pannel.y = -this.scene.cameras.main.displayHeight * 2;
-                    this.scene.tweens.add({
-                        targets: pannel,
-                        y: this.scene.cameras.main.centerY,
-                        duration: 1500,
-                        ease: 'Power2'
-                    });
                     break;
                 case "left":
                     pannel.x = this.scene.cameras.main.displayWidth * 2;
-                    this.scene.tweens.add({
-                        targets: pannel,
-                        x: this.scene.cameras.main.centerX,
-                        duration: 1500,
-                        ease: 'Power2'
-                    });
                     break;
                 case "right":
                     pannel.x = -this.scene.cameras.main.displayWidth * 2;
-                    this.scene.tweens.add({
-                        targets: pannel,
-                        x: this.scene.cameras.main.centerX,
-                        duration: 1500,
-                        ease: 'Power2'
-                    });
                     break;
             }
 
-            
-        } else if(pannelObject.animation == "slideY"){
-            
+            this.scene.tweens.add({
+                targets: pannel,
+                x: this.scene.cameras.main.centerX,
+                y: this.scene.cameras.main.centerY,
+                duration: 1500,
+                ease: 'Power2'
+            });
+
         }
 
     }
