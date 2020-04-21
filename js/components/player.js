@@ -147,4 +147,9 @@ class Player extends Phaser.Physics.Matter.Sprite {
 
         this.setDepth(Math.floor(this.y));
     }
+
+    freezePlayer(){
+        this.setVelocity(0, 0);
+        this.setAngle(0);
+    }
 }

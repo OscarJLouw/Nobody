@@ -15,5 +15,28 @@ class Car extends Phaser.Physics.Matter.Sprite {
         this.setOrigin(0.49, 0.62);
         this.setDepth(y);
         this.setStatic(true); 
+
+        this.scene = scene;
+
+        this.clicked = false;
+        this.setInteractive();
+        this.on('pointerdownoutside', function(pointer){
+            console.log("OUTSIDE");
+            this.clicked = false;
+        });
+        this.on('pointerdown', this.handleClick);
+    }
+
+    handleCollision(collisionPairs, otherBody)
+    {
+        if(this.clicked == true && !this.scene.comicManager.currentlyInComic){
+            this.scene.comicManager.startComic("Introduction");
+            this.clicked = false;
+        }
+    }
+
+    handleClick(pointer,gameObect){
+        if(!this.scene.comicManager.currentlyInComic)
+            this.clicked = true;
     }
 }

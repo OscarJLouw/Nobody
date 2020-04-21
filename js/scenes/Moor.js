@@ -164,7 +164,6 @@ class Moor extends Phaser.Scene {
         });
 
         this.comicManager.startComic("Introduction");
-        
     }
 
     update(time, delta) {
@@ -178,8 +177,11 @@ class Moor extends Phaser.Scene {
 
         }
 
-        if(this.comicManager.currentlyInComic != true)
+        if(this.comicManager.currentlyInComic != true){
             this.player.movePlayer(.2 * delta, delta);
+        } else {
+            this.player.freezePlayer();
+        }
 
         //Change the layer depth of car and player
         /*

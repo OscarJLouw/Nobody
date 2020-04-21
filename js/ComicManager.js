@@ -9,22 +9,16 @@ class ComicManager {
             {
                 pageName: "Intro_1",
                 pannels: [
-                    "testPanel1",
-                    "testPanel2",
-                    "testPanel3",
-                ],
-                animations: [
-                    "none",
-                    "fade",
-                    "fade",
-                    "slide"
+                    {name: "testPanel1", animation: "slide", direction: "down"},
+                    {name: "testPanel2", animation: "fade"},
+                    {name: "testPanel3", animation: "fade"}
                 ]
             },
             {
                 pageName: "Intro_2",
                 pannels: [
-                    "testPanel4",
-                    "testPanel5"
+                    {name: "testPanel4", animation: "slide", direction: "left"},
+                    {name: "testPanel5", animation: "slide", direction: "right"}
                 ],
                 animations: [
                     "none",
@@ -63,8 +57,8 @@ class ComicManager {
         this.drawPannel(this.currentPage.pannels[this.currentPannelIndex]);
     }
 
-    drawPannel(pannelName){
-        var pannel = this.scene.add.image(this.scene.cameras.main.centerX, this.scene.cameras.main.centerY, pannelName);
+    drawPannel(pannelObject){
+        var pannel = this.scene.add.image(this.scene.cameras.main.centerX, this.scene.cameras.main.centerY, pannelObject.name);
 
         var aspectRatio = pannel.displayWidth / pannel.displayHeight;
         pannel.displayHeight = this.scene.cameras.main.displayHeight;
@@ -74,6 +68,60 @@ class ComicManager {
         pannel.setScrollFactor(0);
 
         this.visiblePannels.push(pannel);
+
+        if(pannelObject.animation == "fade"){
+            pannel.setAlpha(0);
+            this.scene.tweens.add({
+                targets: pannel,
+                alpha: 1,
+                duration: 1000,
+                ease: 'Power2'
+            });
+        } else if(pannelObject.animation == "slide"){
+            switch(pannelObject.direction){
+                case "up":
+                    pannel.y = this.scene.cameras.main.displayHeight * 2;
+                    this.scene.tweens.add({
+                        targets: pannel,
+                        y: this.scene.cameras.main.centerY,
+                        duration: 1500,
+                        ease: 'Power2'
+                    });
+                    break;
+                case "down":
+                    pannel.y = -this.scene.cameras.main.displayHeight * 2;
+                    this.scene.tweens.add({
+                        targets: pannel,
+                        y: this.scene.cameras.main.centerY,
+                        duration: 1500,
+                        ease: 'Power2'
+                    });
+                    break;
+                case "left":
+                    pannel.x = this.scene.cameras.main.displayWidth * 2;
+                    this.scene.tweens.add({
+                        targets: pannel,
+                        x: this.scene.cameras.main.centerX,
+                        duration: 1500,
+                        ease: 'Power2'
+                    });
+                    break;
+                case "right":
+                    pannel.x = -this.scene.cameras.main.displayWidth * 2;
+                    this.scene.tweens.add({
+                        targets: pannel,
+                        x: this.scene.cameras.main.centerX,
+                        duration: 1500,
+                        ease: 'Power2'
+                    });
+                    break;
+            }
+
+            
+        } else if(pannelObject.animation == "slideY"){
+            
+        }
+
     }
 
     nextPannel(){
