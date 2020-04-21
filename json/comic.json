@@ -1,14 +1,24 @@
 {
-    "comicList": [{
-        "comicName": "Introduction",
-        "pages": [{
-                "name": "Intro_1",
-                "next": "Intro_2"
-            },
-            {
-                "name": "Intro_2",
-                "next": "none"
-            }
-        ]
-    }]
+    "comicList": [
+        {
+            "comicName": "Introduction",
+            "pages": [{
+                    "name": "Intro_1",
+                    "next": "Intro_2"
+                },
+                {
+                    "name": "Intro_2",
+                    "next": "none"
+                }
+            ]
+        },
+        {
+            "comicName": "Car",
+            "pages": [{
+                    "name": "Intro_2",
+                    "next": "none"
+                }
+            ]
+        }
+    ]
 }
