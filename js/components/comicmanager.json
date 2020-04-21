@@ -1,0 +1,36 @@
+{
+  "pageList": [
+    {
+        "pageName": "Intro_1",
+        "pannels": [
+        {
+            "name": "testPanel1",
+            "animation": "slide",
+            "direction": "down" 
+        },
+        {
+            "name": "testPanel2",
+            "animation": "fade"
+        },
+        {
+            "name": "testPanel3",
+            "animation": "fade"
+        }]
+    },
+
+    {
+
+      "pageName": "Intro_2",
+      "pannels": [
+        {
+            "name": "testPanel4",
+            "animation": "slide",
+            "direction": "left" 
+        },
+        {
+            "name": "testPanel5",
+            "animation": "slide",
+            "direction": "right"
+        }]
+    }]
+}
