@@ -20,10 +20,12 @@ class Car extends Phaser.Physics.Matter.Sprite {
 
         this.clicked = false;
         this.setInteractive();
+
         this.on('pointerdownoutside', function(pointer){
             console.log("OUTSIDE");
             this.clicked = false;
         });
+        
         this.on('pointerdown', this.handleClick);
     }
 
