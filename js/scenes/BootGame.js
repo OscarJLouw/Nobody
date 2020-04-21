@@ -7,6 +7,7 @@ class BootGame extends Phaser.Scene {
 
     // preload loads all assets before scene starts
     preload(){
+        
     }
 
     // create is called when scene is loaded

@@ -9,7 +9,7 @@ class ComicManager {
             {
                 pageName: "Intro_1",
                 pannels: [
-                    {name: "testPanel1", animation: "slide", direction: "down"},
+                    {name: "testPanel1", animation: "slide", direction: "up"},
                     {name: "testPanel2", animation: "fade"},
                     {name: "testPanel3", animation: "fade"}
                 ]
@@ -53,6 +53,15 @@ class ComicManager {
         this.currentPageIndex = 0;
         this.currentPage = this.pageList.find(x => x.pageName === this.currentComic.pages[0].name);
         this.currentPannelIndex = 0;
+        
+        if(comicName != "Introduction"){
+            this.scene.tweens.add({
+                targets: this.scene.overlay,
+                alpha: 0.8,
+                duration: 1000,
+                ease: 'Power2'
+            });
+        }
 
         this.drawPannel(this.currentPage.pannels[this.currentPannelIndex]);
     }
@@ -128,7 +137,23 @@ class ComicManager {
         if(this.currentComic.pages[this.currentPageIndex].next == "none"){
             // Comic is finished
             this.currentlyInComic = false;
-            
+
+            if(this.currentComic.comicName != "Introduction"){
+                this.scene.tweens.add({
+                    targets: this.scene.overlay,
+                    alpha: 0,
+                    duration: 1000,
+                    ease: 'Power2'
+                });
+            } else {
+                this.scene.tweens.add({
+                    targets: this.scene.overlay,
+                    alpha: 0,
+                    duration: 3000,
+                    ease: 'Power2'
+                });
+            }
+
             return true;
         } else {
             this.currentPage = this.pageList.find(x => x.pageName === this.currentComic.pages[this.currentPageIndex].next);

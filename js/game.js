@@ -3,7 +3,7 @@ var debug = false;
 // Game configuration
 var config = {
     type: Phaser.CANVAS,
-    backgroundColor: '#000000',
+    backgroundColor: '#d6c7a1',
     scale: {
         mode: Phaser.Scale.RESIZE,
         parent: 'phaser-game',
