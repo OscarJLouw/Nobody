@@ -83,7 +83,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
             }
 
             if (Math.abs(moveDirection.x) > Math.abs(moveDirection.y)) {
-                this.animationFrameRate = 68;
+                this.animationFrameRate = 80;
 
                 if(updateFrame){
                     var currentFrameIndex = this.walkSideFrames.indexOf(this.currentFrame);
@@ -109,7 +109,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
                     this.flipX = true;
                 }
             } else {
-                this.animationFrameRate = 136;
+                this.animationFrameRate = 160;
                 if (moveDirection.y < 0) {
                     // down
                     this.lastWalkDirection = "Down";
@@ -165,5 +165,16 @@ class Player extends Phaser.Physics.Matter.Sprite {
     freezePlayer(){
         this.setVelocity(0, 0);
         this.setAngle(0);
+        this.idle = true;
+
+        if(this.lastWalkDirection == "Down") {
+            this.setFrame(this.idleFrames[0]);
+        } else if(this.lastWalkDirection == "Up") {
+            this.setFrame(this.idleFrames[2]);
+        } else if(this.lastWalkDirection == "Left") {
+            this.setFrame(this.idleFrames[1]);
+        } else if(this.lastWalkDirection == "Right") {
+            this.setFrame(this.idleFrames[1]);
+        }
     }
 }

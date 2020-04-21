@@ -133,10 +133,39 @@ class Moor extends Phaser.Scene {
         this.journal.setScale(0.3);
         this.journal.setDepth(this.journal.y);
 
-        // Brush
-        for(var i = 0; i<50; i++){
+        // Brush patch bottom
+        for(var i = 0; i<30; i++){
             var brushName = this.brushes[Math.floor(Math.random() * 3)];
-            var brush = this.add.image(Math.random() * this.sceneConfig.sceneWidth, Math.random() * this.sceneConfig.sceneHeight, brushName);
+            var xPosition = 750 + Math.random() * (2100-750);
+            var yPosition = 1680 + Math.random() * (2200-1680);
+
+            var brush = this.add.image(xPosition, yPosition, brushName);
+            
+            brush.setScale(Math.random() * 0.25 + 0.5);
+
+            brush.setDepth(Math.floor(brush.y + brush.scale*30));
+        }
+
+        // Brush top left
+        for(var i = 0; i<10; i++){
+            var brushName = this.brushes[Math.floor(Math.random() * 3)];
+            var xPosition = 1000 + Math.random() * (1900-1000);
+            var yPosition = 650 + Math.random() * (1200-650);
+
+            var brush = this.add.image(xPosition, yPosition, brushName);
+            
+            brush.setScale(Math.random() * 0.25 + 0.5);
+
+            brush.setDepth(Math.floor(brush.y + brush.scale*30));
+        }
+
+        // Brush top right
+        for(var i = 0; i<10; i++){
+            var brushName = this.brushes[Math.floor(Math.random() * 3)];
+            var xPosition = 2300 + Math.random() * (2800-2300);
+            var yPosition = 150 + Math.random() * (650-150);
+
+            var brush = this.add.image(xPosition, yPosition, brushName);
             
             brush.setScale(Math.random() * 0.25 + 0.5);
 

@@ -119,7 +119,6 @@ class ComicManager {
             });
 
         }
-
     }
 
     nextPannel(){
