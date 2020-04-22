@@ -2,7 +2,7 @@
   "pageList": [
     {
         "pageName": "Hag_1",
-        "pannels": [
+        "panels": [
         {
             "name": "Hag1",
             "animation": "slide",
@@ -11,7 +11,7 @@
     },
     {
       "pageName": "Hag_2",
-      "pannels": [
+      "panels": [
         {
             "name": "Hag2",
             "animation": "slide",
@@ -36,7 +36,7 @@
     },
     {
         "pageName": "Hag_Choice1_1",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C1_1",
                 "animation": "slide",
@@ -46,7 +46,7 @@
     },
     {
         "pageName": "Hag_Choice1_2",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C1_2",
                 "animation": "slide",
@@ -56,7 +56,7 @@
     },
     {
         "pageName": "Hag_Choice1_3",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C1_3",
                 "animation": "slide",
@@ -70,7 +70,7 @@
     },
     {
         "pageName": "Hag_Choice1_4",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C1_5",
                 "animation": "slide",
@@ -80,7 +80,7 @@
     },
     {
         "pageName": "Hag_Choice2_1",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C2_1",
                 "animation": "slide",
@@ -90,7 +90,7 @@
     },
     {
         "pageName": "Hag_Choice2_2",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C2_2",
                 "animation": "slide",
@@ -100,7 +100,7 @@
     },
     {
         "pageName": "Hag_Choice2_3",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C2_3",
                 "animation": "slide",
@@ -114,7 +114,7 @@
     },
     {
         "pageName": "Hag_Choice2_4",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C2_5",
                 "animation": "slide",
@@ -124,7 +124,7 @@
     },
     {
         "pageName": "Hag_Choice2_5",
-        "pannels": [
+        "panels": [
             {
                 "name": "Hag_C2_6",
                 "animation": "slide",

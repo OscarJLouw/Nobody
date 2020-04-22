@@ -278,7 +278,7 @@ class Moor extends Phaser.Scene {
         if(this.comicManager.currentlyInComic)
         {
             if(this.comicManager.makingChoice != true){
-                this.comicManager.nextPannel();
+                this.comicManager.nextPanel();
             }
             this.player.targetPosition = new Phaser.Math.Vector2(this.player.x, this.player.y);
         } else {
