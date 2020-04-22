@@ -250,6 +250,7 @@ class ComicManager {
     }
 
     handleOutcomes(outcomes){
+        console.log(outcomes);
 
     }
 }
