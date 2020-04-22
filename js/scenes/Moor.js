@@ -14,12 +14,12 @@ class Moor extends Phaser.Scene {
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
         progressBox.fillStyle(0xe4a2cc, 0.2);
-        progressBox.fillRect(this.cameras.main.width/2 - 320/2, this.cameras.main.height/2, 320, 5);
+        progressBox.fillRect(this.cameras.main.width / 2 - 320 / 2, this.cameras.main.height / 2, 320, 5);
 
         var width = this.cameras.main.width;
         var height = this.cameras.main.height;
-        var xPosition = this.cameras.main.width/2;
-        var yPosition = this.cameras.main.height/2;
+        var xPosition = this.cameras.main.width / 2;
+        var yPosition = this.cameras.main.height / 2;
 
         var percentText = this.make.text({
             x: width / 2,
@@ -31,7 +31,7 @@ class Moor extends Phaser.Scene {
             }
         });
         percentText.setOrigin(0.5, 0.5);
-	
+
         var assetText = this.make.text({
             x: width / 2,
             y: height / 2 + 20,
@@ -46,14 +46,14 @@ class Moor extends Phaser.Scene {
         this.load.on('progress', function (value) {
             progressBar.clear();
             progressBar.fillStyle(0x662b50, 1);
-            progressBar.fillRect(xPosition - 320/2, yPosition, 300 * value, 5);
+            progressBar.fillRect(xPosition - 320 / 2, yPosition, 300 * value, 5);
             percentText.setText(parseInt(value * 100) + '%');
         });
-                    
+
         this.load.on('fileprogress', function (file) {
             assetText.setText('Loading: ' + file.key);
         });
-        
+
         this.load.on('complete', function () {
             progressBar.destroy();
             progressBox.destroy();
@@ -74,8 +74,8 @@ class Moor extends Phaser.Scene {
         this.brushes = ["brush1", "brush2", "brush3"];
 
         this.load.spritesheet("player", "../../img/player/Animation/PlayerAnimation.png", {
-            frameWidth: 256, 
-            frameHeight: 256 
+            frameWidth: 256,
+            frameHeight: 256
         });
 
         this.load.animation("playerAnimations", "../../img/player/Animation/PlayerAnimation.json");
@@ -90,7 +90,7 @@ class Moor extends Phaser.Scene {
         this.comicManager.loadComics(this);
 
         this.interactableList = [];
-        
+
     }
 
     // Called when scene is loaded
@@ -112,6 +112,10 @@ class Moor extends Phaser.Scene {
             this.handleClick(pointer);
         }, this);
 
+        this.input.on('gameobjectdown', function(pointer, gameObject) {
+            this.onObjectClicked(pointer, gameObject);
+        }, this);
+
         //Game Components
         this.background = new Level(this, "background", 0);
 
@@ -119,61 +123,62 @@ class Moor extends Phaser.Scene {
         this.bushes = this.matter.add.image(0, 0, "bushes");
         this.bushes.setBody(shapes.bush_body);
         this.bushes.setStatic(true);
-        this.bushes.x = this.sceneConfig.sceneWidth/2 + 130;
-        this.bushes.y = this.sceneConfig.sceneHeight/2 + 675;
+        this.bushes.x = this.sceneConfig.sceneWidth / 2 + 130;
+        this.bushes.y = this.sceneConfig.sceneHeight / 2 + 675;
         this.bushes.setDepth(5000);
 
         // Detail objects
         this.detail = this.add.image(0, 0, "detail");
-        this.detail.x = this.sceneConfig.sceneWidth/2;
-        this.detail.y = this.sceneConfig.sceneHeight/2;
+        this.detail.x = this.sceneConfig.sceneWidth / 2;
+        this.detail.y = this.sceneConfig.sceneHeight / 2;
         this.detail.setDepth(6);
-        
+
         // Journal
         this.journal = this.add.image(0, 0, "journal");
         this.journal.x = 810;
         this.journal.y = 630;
         this.journal.setScale(0.3);
         this.journal.setDepth(this.journal.y);
+        this.journal.name = "Journal";
         this.interactableList.push(this.journal);
 
         // Brush patch bottom
-        for(var i = 0; i<30; i++){
+        for (var i = 0; i < 30; i++) {
             var brushName = this.brushes[Math.floor(Math.random() * 3)];
-            var xPosition = 750 + Math.random() * (2100-750);
-            var yPosition = 1680 + Math.random() * (2200-1680);
+            var xPosition = 750 + Math.random() * (2100 - 750);
+            var yPosition = 1680 + Math.random() * (2200 - 1680);
 
             var brush = this.add.image(xPosition, yPosition, brushName);
-            
+
             brush.setScale(Math.random() * 0.25 + 0.5);
             brush.flipX = Math.random() >= 0.5;
-            brush.setDepth(Math.floor(brush.y + brush.scale*30));
+            brush.setDepth(Math.floor(brush.y + brush.scale * 30));
         }
 
         // Brush top left
-        for(var i = 0; i<10; i++){
+        for (var i = 0; i < 10; i++) {
             var brushName = this.brushes[Math.floor(Math.random() * 3)];
-            var xPosition = 1000 + Math.random() * (1900-1000);
-            var yPosition = 650 + Math.random() * (1200-650);
+            var xPosition = 1000 + Math.random() * (1900 - 1000);
+            var yPosition = 650 + Math.random() * (1200 - 650);
 
             var brush = this.add.image(xPosition, yPosition, brushName);
-            
+
             brush.setScale(Math.random() * 0.25 + 0.5);
             brush.flipX = Math.random() >= 0.5;
-            brush.setDepth(Math.floor(brush.y + brush.scale*30));
+            brush.setDepth(Math.floor(brush.y + brush.scale * 30));
         }
 
         // Brush top right
-        for(var i = 0; i<10; i++){
+        for (var i = 0; i < 10; i++) {
             var brushName = this.brushes[Math.floor(Math.random() * 3)];
-            var xPosition = 2300 + Math.random() * (2800-2300);
-            var yPosition = 150 + Math.random() * (650-150);
+            var xPosition = 2300 + Math.random() * (2800 - 2300);
+            var yPosition = 150 + Math.random() * (650 - 150);
 
             var brush = this.add.image(xPosition, yPosition, brushName);
-            
+
             brush.setScale(Math.random() * 0.25 + 0.5);
             brush.flipX = Math.random() >= 0.5;
-            brush.setDepth(Math.floor(brush.y + brush.scale*30));
+            brush.setDepth(Math.floor(brush.y + brush.scale * 30));
         }
 
         // Fence
@@ -193,7 +198,7 @@ class Moor extends Phaser.Scene {
         this.interactableList.push(this.hag);
 
         // Camera smooth following
-        this.cameras.main.startFollow(this.player, false, 0.1, 0.1);//, 0.05, 0.05);
+        this.cameras.main.startFollow(this.player, false, 0.1, 0.1); //, 0.05, 0.05);
         this.cameras.main.roundPx = false;
         this.cameras.main.setRoundPixels(false);
 
@@ -208,41 +213,51 @@ class Moor extends Phaser.Scene {
         var emissionCircle2 = new Phaser.Geom.Circle(0, 0, 300);
 
         this.fireflyParticles.createEmitter({
-            x: this.sceneConfig.sceneWidth/2,
-            y: this.sceneConfig.sceneHeight/2,
+            x: this.sceneConfig.sceneWidth / 2,
+            y: this.sceneConfig.sceneHeight / 2,
             lifespan: 10000,
             gravityY: 0,
-            scale: { start: 0, end: .5 },
+            scale: {
+                start: 0,
+                end: .5
+            },
             blendMode: 'ADD',
             quantity: 1,
             frequency: 50,
-            emitZone: { type: 'random', source: emissionCircle },
+            emitZone: {
+                type: 'random',
+                source: emissionCircle
+            },
             maxParticles: 300,
             particleClass: FireflyParticles // custom particle class definition in js/components/fireflyParticles.js
         });
 
         this.fireflyParticles.createEmitter({
-            x: this.sceneConfig.sceneWidth/2+200,
+            x: this.sceneConfig.sceneWidth / 2 + 200,
             y: this.sceneConfig.sceneHeight - 800,
             lifespan: 10000,
             gravityY: 0,
-            scale: { start: 0, end: .5 },
+            scale: {
+                start: 0,
+                end: .5
+            },
             blendMode: 'ADD',
             quantity: 1,
             frequency: 50,
-            emitZone: { type: 'random', source: emissionCircle2 },
+            emitZone: {
+                type: 'random',
+                source: emissionCircle2
+            },
             maxParticles: 200,
             particleClass: FireflyParticles
         });
 
-
-
         //Collision checkers
         this.matter.world.on('collisionactive', function (event, bodyA, bodyB) {
-            if(typeof bodyA.gameObject.handleCollision === 'function'){
+            if (typeof bodyA.gameObject.handleCollision === 'function') {
                 bodyA.gameObject.handleCollision(event.pairs, bodyB);
             }
-            if(typeof bodyB.gameObject.handleCollision === 'function'){
+            if (typeof bodyB.gameObject.handleCollision === 'function') {
                 bodyB.gameObject.handleCollision(event.pairs, bodyA);
             }
         });
@@ -254,8 +269,8 @@ class Moor extends Phaser.Scene {
 
     update(time, delta) {
         //Debug panel
-        if(debug == true){
-            if(this.debugPannel == null){
+        if (debug == true) {
+            if (this.debugPannel == null) {
                 this.debugPannel = document.getElementById("debugPannel");
             }
 
@@ -263,7 +278,7 @@ class Moor extends Phaser.Scene {
 
         }
 
-        if(this.comicManager.currentlyInComic != true){
+        if (this.comicManager.currentlyInComic != true) {
             this.player.movePlayer(.2 * delta, delta);
         } else {
             this.player.freezePlayer();
@@ -281,10 +296,24 @@ class Moor extends Phaser.Scene {
         */
     }
 
-    handleClick(pointer) {
-        if(this.comicManager.currentlyInComic)
+    onObjectClicked(pointer, gameObject)
+    {
+        for(var i = 0; i < this.interactableList.length; i++)
         {
-            if(this.comicManager.makingChoice != true){
+            if(gameObject.name == this.interactableList[i].name){
+                this.interactableList[i].handleClicked(true);    
+            }
+            else
+            {
+                this.interactableList[i].handleClicked(false);
+            }
+        }
+    }
+
+    handleClick(pointer) {
+
+      if (this.comicManager.currentlyInComic) {
+            if (this.comicManager.makingChoice != true) {
                 this.comicManager.nextPanel();
             }
             this.player.targetPosition = new Phaser.Math.Vector2(this.player.x, this.player.y);
