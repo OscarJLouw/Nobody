@@ -134,12 +134,11 @@ class Moor extends Phaser.Scene {
         this.detail.setDepth(6);
 
         // Journal
-        this.journal = this.add.image(0, 0, "journal");
-        this.journal.x = 810;
-        this.journal.y = 630;
+        this.journal = new NPC(this, "journal", null);
+        this.journal.name = "Journal";
+        this.journal.setPosition(810, 630);
         this.journal.setScale(0.3);
         this.journal.setDepth(this.journal.y);
-        this.journal.name = "Journal";
         this.interactableList.push(this.journal);
 
         // Brush patch bottom
@@ -190,7 +189,6 @@ class Moor extends Phaser.Scene {
 
         // Player
         this.player = new Player(this, shapes.player_body);
-        this.interactableList.push(this.player);
 
         //Hag - top character
         this.hag = new NPC(this, "hag", shapes.hag_body);
