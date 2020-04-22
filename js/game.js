@@ -21,7 +21,7 @@ var config = {
             }
         }
     },
-    scene: [BootGame, Moor] // list of scenes in the project
+    scene: [BootGame, Moor, Desert, Ocean] // list of scenes in the project
 }
 
 const debugOverlay = document.createElement('div');
