@@ -51,7 +51,6 @@ function disableDebug(){
     document.getElementById("debugPannel").style = "display:none";
 }
 
-
 window.onkeyup = function(e){
     if(e.keyCode === 32 || e.key === ' '){
         debug = !debug;
