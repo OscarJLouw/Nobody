@@ -1,0 +1,136 @@
+{
+  "pageList": [
+    {
+        "pageName": "Hag_1",
+        "panels": [
+        {
+            "name": "Hag1",
+            "animation": "slide",
+            "direction": "down" 
+        }]
+    },
+    {
+      "pageName": "Hag_2",
+      "panels": [
+        {
+            "name": "Hag2",
+            "animation": "slide",
+            "direction": "left" 
+        },
+        {
+            "name": "Hag3",
+            "animation": "slide",
+            "direction": "left"
+        },
+        {
+            "name": "Hag_C1",
+            "animation": "fade",
+            "choiceID": "mouth"
+        },
+        {
+            "name": "Hag_C2",
+            "animation": "fade",
+            "choiceID": "eyes"
+        }]
+    
+    },
+    {
+        "pageName": "Hag_Choice1_1",
+        "panels": [
+            {
+                "name": "Hag_C1_1",
+                "animation": "slide",
+                "direction": "up"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice1_2",
+        "panels": [
+            {
+                "name": "Hag_C1_2",
+                "animation": "slide",
+                "direction": "down"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice1_3",
+        "panels": [
+            {
+                "name": "Hag_C1_3",
+                "animation": "slide",
+                "direction": "down"
+            },
+            {
+                "name": "Hag_C1_4",
+                "animation": "fade"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice1_4",
+        "panels": [
+            {
+                "name": "Hag_C1_5",
+                "animation": "slide",
+                "direction": "down"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice2_1",
+        "panels": [
+            {
+                "name": "Hag_C2_1",
+                "animation": "slide",
+                "direction": "up"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice2_2",
+        "panels": [
+            {
+                "name": "Hag_C2_2",
+                "animation": "slide",
+                "direction": "down"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice2_3",
+        "panels": [
+            {
+                "name": "Hag_C2_3",
+                "animation": "slide",
+                "direction": "down"
+            },
+            {
+                "name": "Hag_C2_4",
+                "animation": "fade"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice2_4",
+        "panels": [
+            {
+                "name": "Hag_C2_5",
+                "animation": "slide",
+                "direction": "down"
+            }
+        ]
+    },
+    {
+        "pageName": "Hag_Choice2_5",
+        "panels": [
+            {
+                "name": "Hag_C2_6",
+                "animation": "slide",
+                "direction": "down"
+            }
+        ]
+    }
+]
+}

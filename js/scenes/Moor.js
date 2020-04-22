@@ -146,7 +146,7 @@ class Moor extends Phaser.Scene {
             var brush = this.add.image(xPosition, yPosition, brushName);
             
             brush.setScale(Math.random() * 0.25 + 0.5);
-
+            brush.flipX = Math.random() >= 0.5;
             brush.setDepth(Math.floor(brush.y + brush.scale*30));
         }
 
@@ -159,7 +159,7 @@ class Moor extends Phaser.Scene {
             var brush = this.add.image(xPosition, yPosition, brushName);
             
             brush.setScale(Math.random() * 0.25 + 0.5);
-
+            brush.flipX = Math.random() >= 0.5;
             brush.setDepth(Math.floor(brush.y + brush.scale*30));
         }
 
@@ -172,7 +172,7 @@ class Moor extends Phaser.Scene {
             var brush = this.add.image(xPosition, yPosition, brushName);
             
             brush.setScale(Math.random() * 0.25 + 0.5);
-
+            brush.flipX = Math.random() >= 0.5;
             brush.setDepth(Math.floor(brush.y + brush.scale*30));
         }
 
@@ -193,7 +193,7 @@ class Moor extends Phaser.Scene {
         this.interactableList.push(this.hag);
 
         // Camera smooth following
-        this.cameras.main.startFollow(this.player, false);//, 0.05, 0.05);
+        this.cameras.main.startFollow(this.player, false, 0.1, 0.1);//, 0.05, 0.05);
         this.cameras.main.roundPx = false;
         this.cameras.main.setRoundPixels(false);
 
@@ -202,6 +202,8 @@ class Moor extends Phaser.Scene {
 
         // Particle systems
         this.fireflyParticles = this.add.particles("firefly");
+        this.fireflyParticles.setDepth(5000);
+
         var emissionCircle = new Phaser.Geom.Circle(0, 0, 1500);
         var emissionCircle2 = new Phaser.Geom.Circle(0, 0, 300);
 
@@ -232,6 +234,8 @@ class Moor extends Phaser.Scene {
             maxParticles: 200,
             particleClass: FireflyParticles
         });
+
+
 
         //Collision checkers
         this.matter.world.on('collisionactive', function (event, bodyA, bodyB) {
@@ -280,7 +284,9 @@ class Moor extends Phaser.Scene {
     handleClick(pointer) {
         if(this.comicManager.currentlyInComic)
         {
-            this.comicManager.nextPannel();
+            if(this.comicManager.makingChoice != true){
+                this.comicManager.nextPanel();
+            }
             this.player.targetPosition = new Phaser.Math.Vector2(this.player.x, this.player.y);
         } else {
             this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);

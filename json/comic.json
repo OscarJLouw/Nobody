@@ -19,6 +19,63 @@
                     "next": "none"
                 }
             ]
+        },
+        {
+            "comicName": "Hag_FirstMeeting",
+            "pages": [
+                {
+                    "name": "Hag_1",
+                    "next": "Hag_2"
+                },
+                {
+                    "name": "Hag_2",
+                    "next": "choice",
+                    "choices": [
+                        {"choiceID": "mouth", "next":"Hag_Choice1_1"},
+                        {"choiceID": "eyes", "next":"Hag_Choice2_1"}
+                    ]
+                },
+
+                {
+                    "name": "Hag_Choice1_1",
+                    "next": "Hag_Choice1_2"
+                },
+                {
+                    "name": "Hag_Choice1_2",
+                    "next": "Hag_Choice1_3"
+                },
+                {
+                    "name": "Hag_Choice1_3",
+                    "next": "Hag_Choice1_4"
+                },
+                {
+                    "name": "Hag_Choice1_4",
+                    "next": "none",
+                    "outcomes": ["choseMouth", "sleepHag"]
+                },
+                
+                {
+                    "name": "Hag_Choice2_1",
+                    "next": "Hag_Choice2_2"
+                },
+                {
+                    "name": "Hag_Choice2_2",
+                    "next": "Hag_Choice2_3"
+                },
+                {
+                    "name": "Hag_Choice2_3",
+                    "next": "Hag_Choice2_4"
+                },
+                {
+                    "name": "Hag_Choice2_4",
+                    "next": "Hag_Choice2_5"
+                },
+                {
+                    "name": "Hag_Choice2_5",
+                    "next": "none",
+                    "outcomes": ["choseEyes", "sleepHag"]
+                }
+            ]
         }
     ]
 }

@@ -2,7 +2,7 @@
   "pageList": [
     {
         "pageName": "Intro_1",
-        "pannels": [
+        "panels": [
         {
             "name": "testPanel1",
             "animation": "slide",
@@ -21,7 +21,7 @@
     {
 
       "pageName": "Intro_2",
-      "pannels": [
+      "panels": [
         {
             "name": "testPanel4",
             "animation": "slide",
