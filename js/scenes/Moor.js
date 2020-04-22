@@ -263,7 +263,21 @@ class Moor extends Phaser.Scene {
         });
 
         this.comicManager.loadJSONComics(this);
-        this.comicManager.startComic("Introduction");
+        if(debug != true){
+            this.comicManager.startComic("Introduction");
+        } else {
+            //this.overlay.alpha = 1;
+
+            this.tweens.add({
+                targets: this.overlay,
+                alpha: 0,
+                duration: 3000,
+                ease: 'Power2',
+                onComplete: function(){
+                    this.parent.scene.overlay.setVisible(false);
+                }
+            });
+        }
 
     }
 

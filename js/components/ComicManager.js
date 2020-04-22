@@ -251,5 +251,7 @@ class ComicManager {
 
     handleOutcomes(outcomes){
         //Scene Manager save status method
+        console.log(outcomes);
+
     }
 }
