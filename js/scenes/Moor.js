@@ -118,6 +118,7 @@ class Moor extends Phaser.Scene {
 
         //Game Components
         this.background = new Level(this, "background", 0);
+        this.interactableList.push(this.background);
 
         // Bushes overlay
         this.bushes = this.matter.add.image(0, 0, "bushes");
@@ -312,11 +313,15 @@ class Moor extends Phaser.Scene {
     {
         for(var i = 0; i < this.interactableList.length; i++)
         {
+         //   console.log(this.interactableList[i]);
+
             if(gameObject.name == this.interactableList[i].name){
-                this.interactableList[i].handleClicked(true);    
+                //console.log("Click " + gameObject.name);
+                this.interactableList[i].handleClicked(true);   
             }
             else
             {
+           //     console.log(this.interactableList[i].name);
                 this.interactableList[i].handleClicked(false);
             }
         }
