@@ -88,6 +88,9 @@ class Moor extends Phaser.Scene {
 
         this.comicManager = new ComicManager(this);
         this.comicManager.loadComics(this);
+
+        this.interactableList = [];
+        
     }
 
     // Called when scene is loaded
@@ -132,6 +135,7 @@ class Moor extends Phaser.Scene {
         this.journal.y = 630;
         this.journal.setScale(0.3);
         this.journal.setDepth(this.journal.y);
+        this.interactableList.push(this.journal);
 
         // Brush patch bottom
         for(var i = 0; i<30; i++){
@@ -177,12 +181,16 @@ class Moor extends Phaser.Scene {
 
         // Car
         this.car = new Car(this, shapes.car_body);
+        this.interactableList.push(this.car);
 
         // Player
         this.player = new Player(this, shapes.player_body);
+        this.interactableList.push(this.player);
 
+        //Hag - top character
         this.hag = new NPC(this, "hag", shapes.hag_body);
         this.hag.setPosition(1800, 180);
+        this.interactableList.push(this.hag);
 
         // Camera smooth following
         this.cameras.main.startFollow(this.player, false);//, 0.05, 0.05);
