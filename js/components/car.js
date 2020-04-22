@@ -16,6 +16,9 @@ class Car extends Phaser.Physics.Matter.Sprite {
         this.setDepth(y);
         this.setStatic(true); 
 
+        this.name = "Car";
+        this.setName("Car");
+
         this.scene = scene;
 
         this.clicked = false;
@@ -37,8 +40,16 @@ class Car extends Phaser.Physics.Matter.Sprite {
         }
     }
 
-    handleClick(pointer,gameObect){
+    handleClick(pointer, gameObect){
         if(!this.scene.comicManager.currentlyInComic)
             this.clicked = true;
+    }
+
+    /// Set this.clicked to true or false depending where the player clicked
+    /// this lets the player click on the car and just after on the scenario without the 
+    /// comic panel open.
+    handleClicked(_status)
+    {
+        this.clicked = _status;
     }
 }

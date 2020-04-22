@@ -15,6 +15,9 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.setDepth(y);
         this.setScale(0.5);
         
+        this.name = "Player";
+        this.setName("Player");
+
         this.targetPosition = new Phaser.Math.Vector2(x, y);
 
         this.separationPenetration = null;
