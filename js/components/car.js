@@ -22,7 +22,7 @@ class Car extends Phaser.Physics.Matter.Sprite {
         this.scene = scene;
 
         this.clicked = false;
-        this.setInteractive();
+        this.setInteractive({ cursor: 'url(../../img/cursorHover.cur), pointer', pixelPerfect: true});
 
         this.on('pointerdownoutside', function(pointer){
             console.log("OUTSIDE");

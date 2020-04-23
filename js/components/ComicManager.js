@@ -183,7 +183,8 @@ class ComicManager {
             var panel = this.drawPanel(choicePanels[i]);
             
             var next = currentChoicesAvailable.find(x => x.choiceID == choicePanels[i].choiceID).next;
-            panel.setInteractive({pixelPerfect: true});
+            panel.setInteractive({ cursor: 'url(../../img/cursorHover.cur), pointer', pixelPerfect: true});
+
             panel.next = next;
 
             panel.on("pointerdown", function(){
@@ -267,7 +268,7 @@ class ComicManager {
                 targets: this.visiblePanels[i],
                 y: -this.scene.cameras.main.displayHeight,
                 duration: 1000,
-                ease: 'Power2',
+                ease: 'Cubic.InOut',
                 onComplete: function(){
                     this.targets[0].destroy();
                 }

@@ -86,6 +86,9 @@ class BootGame extends Phaser.Scene {
         this.scale.on('resize', Resize, this);
         this.add.text(20,20,"Loading game...");
 
+        this.input.setDefaultCursor('url(../../img/cursor.cur), pointer');
+        this.input.setPollAlways();
+        
         // Load the first level
         this.scene.start("MoorLevel");
     }
