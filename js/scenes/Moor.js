@@ -28,6 +28,7 @@ class Moor extends Phaser.Scene {
         this.overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
         this.overlay.setScrollFactor(0);
         this.overlay.setDepth(99999);
+        this.overlayActive = true;
 
         // Camera
         this.cameras.main.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
@@ -44,9 +45,16 @@ class Moor extends Phaser.Scene {
             this.onObjectClicked(pointer, gameObject);
         }, this);
 
+        this.input.on('gameobjectover', function(pointer, gameObject) {
+            this.onObjectOver(pointer, gameObject);
+        }, this);
+
+        this.input.on('gameobjectout', function(pointer, gameObject) {
+            this.onObjectOut(pointer, gameObject);
+        }, this);
+
         //Game Components
         this.background = new Level(this, "background", 0);
-        this.interactableList.push(this.background);
 
         // Bushes overlay
         this.bushes = this.matter.add.image(0, 0, "bushes");
@@ -194,6 +202,7 @@ class Moor extends Phaser.Scene {
             this.comicManager.startComic("Introduction");
         } else {
             //this.overlay.alpha = 1;
+            this.overlayActive = false;
 
             this.tweens.add({
                 targets: this.overlay,
@@ -224,35 +233,35 @@ class Moor extends Phaser.Scene {
         } else {
             this.player.freezePlayer();
         }
-
-        //Change the layer depth of car and player
-        /*
-        if (this.player.y > this.car.y) {
-            this.player.setDepth(2);
-            this.car.setDepth(1);
-        } else {
-            this.player.setDepth(1);
-            this.car.setDepth(2);
-        }
-        */
     }
 
     onObjectClicked(pointer, gameObject)
     {
         for(var i = 0; i < this.interactableList.length; i++)
         {
-         //   console.log(this.interactableList[i]);
-
             if(gameObject.name == this.interactableList[i].name){
-                //console.log("Click " + gameObject.name);
                 this.interactableList[i].handleClicked(true);   
             }
             else
             {
-           //     console.log(this.interactableList[i].name);
                 this.interactableList[i].handleClicked(false);
             }
         }
+    }
+
+    onObjectOver(pointer, gameObject){
+        if(!this.overlayActive){
+            for(var i = 0; i < this.interactableList.length; i++)
+            {
+                if(gameObject.name == this.interactableList[i].name){
+                    this.input.setDefaultCursor('url(../../img/cursorHover.cur), pointer');
+                }
+            }
+        }
+    }
+
+    onObjectOut(pointer, gameObject){
+        this.input.setDefaultCursor('url(../../img/cursor.cur), pointer');
     }
 
     handleClick(pointer) {
@@ -265,6 +274,32 @@ class Moor extends Phaser.Scene {
         } else {
             this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
         }
+    }
+
+    fadeInOverlay(fadeTime = 1000){
+        this.input.setDefaultCursor('url(../../img/cursor.cur), pointer');
+        this.overlayActive = true;
+        this.overlay.setVisible(true);
+        this.tweens.add({
+            targets: this.overlay,
+            alpha: 0.8,
+            duration: fadeTime,
+            ease: 'Power2'
+        });
+    }
+
+    fadeOutOverlay(fadeTime = 1000){
+        this.overlayActive = false;
+        this.tweens.add({
+            targets: this.overlay,
+            alpha: 0,
+            duration: fadeTime,
+            ease: 'Power2',
+            onComplete: function(){
+                this.parent.scene.overlay.setVisible(false);
+                this.parent.scene.comicManager.ableToStartComic = true;
+            }
+        });
     }
 }
 

@@ -4,7 +4,7 @@ class Desert extends Phaser.Scene {
     {
         super({ 
             key: 'Desert', 
-            active: true,
+            active: false,
             visible: false,
              
         });

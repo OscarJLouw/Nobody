@@ -67,15 +67,7 @@ class ComicManager {
             this.currentPage = this.pageList.find(x => x.pageName === this.currentComic.pages[0].name);
             this.currentPanelIndex = 0;
 
-            this.scene.overlay.setVisible(true);
-            if(comicName != "Introduction"){
-                this.scene.tweens.add({
-                    targets: this.scene.overlay,
-                    alpha: 0.8,
-                    duration: 1000,
-                    ease: 'Power2'
-                });
-            }
+            this.scene.fadeInOverlay();
 
             this.drawPanel(this.currentPage.panels[this.currentPanelIndex]);
         }
@@ -218,27 +210,9 @@ class ComicManager {
                 this.currentlyInComic = false;
 
                 if (this.currentComic.comicName != "Introduction") {
-                    this.scene.tweens.add({
-                        targets: this.scene.overlay,
-                        alpha: 0,
-                        duration: 1000,
-                        ease: 'Power2',
-                        onComplete: function(){
-                            this.parent.scene.overlay.setVisible(false);
-                            this.parent.scene.comicManager.ableToStartComic = true;
-                        }
-                    });
+                    this.scene.fadeOutOverlay();
                 } else {
-                    this.scene.tweens.add({
-                        targets: this.scene.overlay,
-                        alpha: 0,
-                        duration: 3000,
-                        ease: 'Power2',
-                        onComplete: function(){
-                            this.parent.scene.overlay.setVisible(false);
-                            this.parent.scene.comicManager.ableToStartComic = true;
-                        }
-                    });
+                    this.scene.fadeOutOverlay(3000);
                 }
 
                 if(this.currentComic.pages[this.comicPageIndex].outcomes != null){

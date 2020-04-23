@@ -2,7 +2,7 @@ class Ocean extends Phaser.Scene {
 
     constructor ()
     {
-        super({ key: 'Ocean', active: true });
+        super({ key: 'Ocean', active: false });
     }
 
     create ()
