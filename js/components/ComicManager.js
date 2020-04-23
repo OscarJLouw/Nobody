@@ -4,6 +4,8 @@ class ComicManager {
         this.visiblePanels = [];
         this.currentlyInComic = false;
         this.makingChoice = false;
+        this.ableToInteract = true;
+        this.ableToStartComic = true;
     }
 
     loadComics(scene) {
@@ -54,28 +56,34 @@ class ComicManager {
     }
 
     startComic(comicName) {
-        this.currentlyInComic = true;
+        if(this.ableToStartComic){
+            this.ableToStartComic = false;
 
-        this.currentComic = this.comicList.find(x => x.comicName === comicName);
-        this.currentPageIndex = 0;
-        this.comicPageIndex = 0;
-        this.currentPage = this.pageList.find(x => x.pageName === this.currentComic.pages[0].name);
-        this.currentPanelIndex = 0;
+            this.currentlyInComic = true;
 
-        this.scene.overlay.setVisible(true);
-        if(comicName != "Introduction"){
-            this.scene.tweens.add({
-                targets: this.scene.overlay,
-                alpha: 0.8,
-                duration: 1000,
-                ease: 'Power2'
-            });
+            this.currentComic = this.comicList.find(x => x.comicName === comicName);
+            this.currentPageIndex = 0;
+            this.comicPageIndex = 0;
+            this.currentPage = this.pageList.find(x => x.pageName === this.currentComic.pages[0].name);
+            this.currentPanelIndex = 0;
+
+            this.scene.overlay.setVisible(true);
+            if(comicName != "Introduction"){
+                this.scene.tweens.add({
+                    targets: this.scene.overlay,
+                    alpha: 0.8,
+                    duration: 1000,
+                    ease: 'Power2'
+                });
+            }
+
+            this.drawPanel(this.currentPage.panels[this.currentPanelIndex]);
         }
-
-        this.drawPanel(this.currentPage.panels[this.currentPanelIndex]);
     }
 
     drawPanel(panelObject) {
+        this.ableToInteract = false;
+        
         var panel = this.scene.add.image(this.scene.cameras.main.centerX, this.scene.cameras.main.centerY, panelObject.name);
 
         var aspectRatio = panel.displayWidth / panel.displayHeight;
@@ -85,7 +93,6 @@ class ComicManager {
         panel.setDepth(99999);
         panel.setScrollFactor(0);
 
-        this.visiblePanels.push(panel);
 
         if (panelObject.animation == "fade") {
             panel.setAlpha(0);
@@ -93,7 +100,10 @@ class ComicManager {
                 targets: panel,
                 alpha: 1,
                 duration: 1000,
-                ease: 'Power2'
+                ease: 'Power2',
+                onComplete: function(){
+                    this.parent.scene.comicManager.ableToInteract = true;
+                }
             });
         } else if (panelObject.animation == "slide") {
             switch (panelObject.direction) {
@@ -116,45 +126,50 @@ class ComicManager {
                 x: this.scene.cameras.main.centerX,
                 y: this.scene.cameras.main.centerY,
                 duration: 1500,
-                ease: 'Power2'
+                ease: 'Power2',
+                onComplete: function(){
+                    this.parent.scene.comicManager.ableToInteract = true;
+                }
             });
 
         }
+
+        this.visiblePanels.push(panel);
 
         return panel;
     }
 
     nextPanel() {
-        this.currentPanelIndex++;
-        
-        var panel = this.currentPage.panels[this.currentPanelIndex];
+        if(this.ableToInteract == true){
+            this.currentPanelIndex++;
+            
+            var panel = this.currentPage.panels[this.currentPanelIndex];
 
-        if (panel != null) {
-            if(panel.choiceID != null){
-                // this is a choice
-                var i = this.currentPanelIndex;
-                var choicePanels = [];
-                while(this.currentPage.panels[i] != null && this.currentPage.panels[i].choiceID != null){
-                    choicePanels.push(this.currentPage.panels[i]);
-                    i++;
+            if (panel != null) {
+                if(panel.choiceID != null){
+                    // this is a choice
+                    var i = this.currentPanelIndex;
+                    var choicePanels = [];
+                    while(this.currentPage.panels[i] != null && this.currentPage.panels[i].choiceID != null){
+                        choicePanels.push(this.currentPage.panels[i]);
+                        i++;
+                    }
+
+                    this.drawChoices(choicePanels);
+                } else {
+                    this.drawPanel(panel);
                 }
-
-                this.drawChoices(choicePanels);
+                return false;
             } else {
-                this.drawPanel(panel);
+                // There is no further panel in this page
+                this.clearVisiblePanels();
+                return this.nextPage();
             }
-            return false;
-        } else {
-            // There is no further panel in this page
-            this.clearVisiblePanels();
-            return this.nextPage();
         }
     }
 
     drawChoices(choicePanels){
         this.makingChoice = true;
-        
-        //var choices = this.currentComic.pages[this.currentPageIndex].choices;
         
         var currentChoicesAvailable = [];
         for(var i = 0; i<this.currentComic.pages.length; i++){
@@ -172,7 +187,9 @@ class ComicManager {
             panel.next = next;
 
             panel.on("pointerdown", function(){
-                this.input.gameObject.scene.comicManager.nextPage(this.input.gameObject.next);
+                if(this.scene.comicManager.ableToInteract){
+                    this.input.gameObject.scene.comicManager.nextPage(this.input.gameObject.next);
+                }
             });
         }
 
@@ -180,9 +197,9 @@ class ComicManager {
 
     nextPage(next = "null") {
         if(next !="null"){
+
             // this panel was clicked
             this.clearVisiblePanels();
-            
             this.makingChoice = false;
 
             // if the next comic is set in the function call
@@ -190,6 +207,7 @@ class ComicManager {
             this.currentPage = this.pageList.find(x => x.pageName === next);
             this.comicPageIndex = this.currentComic.pages.findIndex(x => x.name === this.currentPage.pageName);
             //this.currentPageIndex = this.pageList.findIndex(x => x.pageName === next);
+            
             this.drawPanel(this.currentPage.panels[this.currentPanelIndex]);
 
             return false;
@@ -206,6 +224,7 @@ class ComicManager {
                         ease: 'Power2',
                         onComplete: function(){
                             this.parent.scene.overlay.setVisible(false);
+                            this.parent.scene.comicManager.ableToStartComic = true;
                         }
                     });
                 } else {
@@ -216,6 +235,7 @@ class ComicManager {
                         ease: 'Power2',
                         onComplete: function(){
                             this.parent.scene.overlay.setVisible(false);
+                            this.parent.scene.comicManager.ableToStartComic = true;
                         }
                     });
                 }
@@ -243,8 +263,18 @@ class ComicManager {
 
     clearVisiblePanels(){
         for (var i = 0; i < this.visiblePanels.length; i++) {
-            this.visiblePanels[i].destroy();
+            this.scene.tweens.add({
+                targets: this.visiblePanels[i],
+                y: -this.scene.cameras.main.displayHeight,
+                duration: 1000,
+                ease: 'Power2',
+                onComplete: function(){
+                    this.targets[0].destroy();
+                }
+            });
         }
+
+        this.visiblePanels.splice(0, this.visiblePanels.length);
 
         this.currentPanelIndex = 0;
     }
@@ -252,6 +282,5 @@ class ComicManager {
     handleOutcomes(outcomes){
         //Scene Manager save status method
         console.log(outcomes);
-
     }
 }

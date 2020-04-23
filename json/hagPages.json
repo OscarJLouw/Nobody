@@ -6,7 +6,7 @@
         {
             "name": "Hag1",
             "animation": "slide",
-            "direction": "down" 
+            "direction": "up" 
         }]
     },
     {
@@ -50,7 +50,7 @@
             {
                 "name": "Hag_C1_2",
                 "animation": "slide",
-                "direction": "down"
+                "direction": "up"
             }
         ]
     },
@@ -60,7 +60,7 @@
             {
                 "name": "Hag_C1_3",
                 "animation": "slide",
-                "direction": "down"
+                "direction": "up"
             },
             {
                 "name": "Hag_C1_4",
@@ -74,7 +74,7 @@
             {
                 "name": "Hag_C1_5",
                 "animation": "slide",
-                "direction": "down"
+                "direction": "up"
             }
         ]
     },
@@ -94,7 +94,7 @@
             {
                 "name": "Hag_C2_2",
                 "animation": "slide",
-                "direction": "down"
+                "direction": "up"
             }
         ]
     },
@@ -104,7 +104,7 @@
             {
                 "name": "Hag_C2_3",
                 "animation": "slide",
-                "direction": "down"
+                "direction": "up"
             },
             {
                 "name": "Hag_C2_4",
@@ -118,7 +118,7 @@
             {
                 "name": "Hag_C2_5",
                 "animation": "slide",
-                "direction": "down"
+                "direction": "up"
             }
         ]
     },
@@ -128,7 +128,7 @@
             {
                 "name": "Hag_C2_6",
                 "animation": "slide",
-                "direction": "down"
+                "direction": "up"
             }
         ]
     }
