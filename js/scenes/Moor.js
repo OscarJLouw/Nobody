@@ -49,6 +49,10 @@ class Moor extends Phaser.Scene {
             this.onObjectOver(pointer, gameObject);
         }, this);
 
+        this.input.on('gameobjectmove', function(pointer, gameObject) {
+            this.onObjectOver(pointer, gameObject);
+        }, this);
+
         this.input.on('gameobjectout', function(pointer, gameObject) {
             this.onObjectOut(pointer, gameObject);
         }, this);
@@ -76,6 +80,8 @@ class Moor extends Phaser.Scene {
         this.journal.setPosition(810, 630);
         this.journal.setScale(0.3);
         this.journal.setDepth(this.journal.y);
+        this.journal.setInteractive();
+        this.journal.isInteractable = true;
         this.interactableList.push(this.journal);
 
         // Brush patch bottom
@@ -122,6 +128,7 @@ class Moor extends Phaser.Scene {
 
         // Car
         this.car = new Car(this, shapes.car_body);
+        this.car.isInteractable = true;
         this.interactableList.push(this.car);
 
         // Player
@@ -130,6 +137,8 @@ class Moor extends Phaser.Scene {
         //Hag - top character
         this.hag = new NPC(this, "hag", shapes.hag_body);
         this.hag.setPosition(1800, 180);
+        this.hag.setInteractive({pixelPerfect: true});
+        this.hag.isInteractable = true;
         this.interactableList.push(this.hag);
 
         // Camera smooth following
@@ -251,11 +260,8 @@ class Moor extends Phaser.Scene {
 
     onObjectOver(pointer, gameObject){
         if(!this.overlayActive){
-            for(var i = 0; i < this.interactableList.length; i++)
-            {
-                if(gameObject.name == this.interactableList[i].name){
-                    this.input.setDefaultCursor('url(../../img/cursorHover.cur), pointer');
-                }
+            if(gameObject != null && gameObject.isInteractable == true){
+                this.input.setDefaultCursor('url(../../img/cursorHover.cur), pointer');
             }
         }
     }
