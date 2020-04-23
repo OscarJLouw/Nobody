@@ -39,7 +39,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
         var collision = collisionPairs[0].collision;
         this.separationPenetration = collision.penetration;
         
-        if(collision.bodyA.id == "51"){
+        if(collision.bodyA.gameObject.name == "Player"){
             this.separationPenetration.x = -collision.penetration.x;
             this.separationPenetration.y = -collision.penetration.y;
         }
