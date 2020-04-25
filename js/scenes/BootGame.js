@@ -62,7 +62,17 @@ class BootGame extends Phaser.Scene {
             frameHeight: 256
         });
 
-        this.load.animation("playerAnimations", "../../img/player/Animation/PlayerAnimation.json");
+        this.load.spritesheet("player_mouth", "../../img/player/Animation/PlayerAnimation_Mouth.png", {
+            frameWidth: 256,
+            frameHeight: 256
+        });
+
+        this.load.spritesheet("player_eyes", "../../img/player/Animation/PlayerAnimation_Eyes.png", {
+            frameWidth: 256,
+            frameHeight: 256
+        });
+
+        //this.load.animation("playerAnimations", "../../img/player/Animation/PlayerAnimation.json");
 
         // Particles
         this.load.image("firefly", "../../img/firefly.png");

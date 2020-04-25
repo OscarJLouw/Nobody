@@ -34,6 +34,10 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.idle = true;
     }
 
+    setSpriteSheet(key){
+        this.setTexture(key);
+    }
+
     handleCollision(collisionPairs, otherBody)
     {
         var collision = collisionPairs[0].collision;
@@ -162,7 +166,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
         this.setVelocity(-moveDirection.x, -moveDirection.y);
         this.setAngle(0);
 
-        this.setDepth(Math.floor(this.y));
+        this.setDepth(Math.floor(this.y) + 20);
     }
 
     freezePlayer(){

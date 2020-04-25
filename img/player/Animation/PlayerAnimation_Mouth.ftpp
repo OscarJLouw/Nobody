@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "version": "0.6.5"
+  },
+  "savePath": "D:\\LITTLEFOOTPRINT\\Git\\Nobody\\img\\player\\Animation",
+  "images": [],
+  "folders": [
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/withmouth/back",
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/withmouth/front",
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/withmouth/idle",
+    "D:/LITTLEFOOTPRINT/Git/Nobody/img/player/Animation/withmouth/side"
+  ],
+  "packOptions": {
+    "textureName": "PlayerAnimation_Mouth",
+    "textureFormat": "png",
+    "removeFileExtension": true,
+    "prependFolderName": true,
+    "base64Export": false,
+    "tinify": false,
+    "tinifyKey": "",
+    "scale": 0.5,
+    "disableSmoothing": false,
+    "filter": "none",
+    "exporter": "Phaser 3",
+    "fileName": "pack-result",
+    "savePath": "D:\\LITTLEFOOTPRINT\\Git\\Nobody\\img\\player\\Animation",
+    "width": 2560,
+    "height": 2048,
+    "fixedSize": true,
+    "powerOfTwo": false,
+    "padding": 0,
+    "extrude": 0,
+    "allowRotation": false,
+    "allowTrim": false,
+    "trimMode": "trim",
+    "alphaThreshold": "0",
+    "detectIdentical": false,
+    "packer": "MaxRectsBin",
+    "packerMethod": "BestShortSideFit"
+  }
+}

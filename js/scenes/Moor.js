@@ -346,8 +346,10 @@ class Moor extends Phaser.Scene {
     updateBody(newPart){
         if(newPart == "eyes"){
             // change the player sprite to add eyes
+            this.player.setSpriteSheet("player_eyes");
         } else if(newPart == "mouth"){
             // change the player sprite to add mouth
+            this.player.setSpriteSheet("player_mouth");
         }
     }
 
