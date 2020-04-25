@@ -131,6 +131,15 @@
                 "direction": "up"
             }
         ]
+    },
+    {
+        "pageName": "Hag_Sleeping",
+        "panels": [
+        {
+            "name": "Hag_Sleeping",
+            "animation": "slide",
+            "direction": "left" 
+        }]
     }
 ]
 }

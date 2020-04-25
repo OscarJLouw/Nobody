@@ -9,33 +9,36 @@ class ComicManager {
     }
 
     loadComics(scene) {
+        scene.load.setBaseURL("../../img/Comics");
+
         // Intro panels
-        scene.load.image("testPanel1", "../../img/Comics/Intro/testpanel1.png");
-        scene.load.image("testPanel2", "../../img/Comics/Intro/testpanel2.png");
-        scene.load.image("testPanel3", "../../img/Comics/Intro/testpanel3.png");
-        scene.load.image("testPanel4", "../../img/Comics/Intro/testpanel4.png");
-        scene.load.image("testPanel5", "../../img/Comics/Intro/testpanel5.png");
+        scene.load.image("testPanel1", "Intro/testpanel1.png");
+        scene.load.image("testPanel2", "Intro/testpanel2.png");
+        scene.load.image("testPanel3", "Intro/testpanel3.png");
+        scene.load.image("testPanel4", "Intro/testpanel4.png");
+        scene.load.image("testPanel5", "Intro/testpanel5.png");
 
         // Hag panels
-        scene.load.image("Hag1", "../../img/Comics/Hag/Hag1.png");
-        scene.load.image("Hag2", "../../img/Comics/Hag/Hag2.png");
-        scene.load.image("Hag3", "../../img/Comics/Hag/Hag3.png");
+        scene.load.image("Hag1", "Hag/Hag1.png");
+        scene.load.image("Hag2", "Hag/Hag2.png");
+        scene.load.image("Hag3", "Hag/Hag3.png");
         // choice 1
-        scene.load.image("Hag_C1", "../../img/Comics/Hag/HagChoice1.png");
-        scene.load.image("Hag_C1_1", "../../img/Comics/Hag/HagChoice1_1.png");
-        scene.load.image("Hag_C1_2", "../../img/Comics/Hag/HagChoice1_2.png");
-        scene.load.image("Hag_C1_3", "../../img/Comics/Hag/HagChoice1_3_withoutmouth.png");
-        scene.load.image("Hag_C1_4", "../../img/Comics/Hag/HagChoice1_3.png");
-        scene.load.image("Hag_C1_5", "../../img/Comics/Hag/HagChoice1_4.png");
+        scene.load.image("Hag_C1", "Hag/HagChoice1.png");
+        scene.load.image("Hag_C1_1", "Hag/HagChoice1_1.png");
+        scene.load.image("Hag_C1_2", "Hag/HagChoice1_2.png");
+        scene.load.image("Hag_C1_3", "Hag/HagChoice1_3_withoutmouth.png");
+        scene.load.image("Hag_C1_4", "Hag/HagChoice1_3.png");
+        scene.load.image("Hag_C1_5", "Hag/HagChoice1_4.png");
         // choice 2
-        scene.load.image("Hag_C2", "../../img/Comics/Hag/HagChoice2.png");
-        scene.load.image("Hag_C2_1", "../../img/Comics/Hag/HagChoice2_1.png");
-        scene.load.image("Hag_C2_2", "../../img/Comics/Hag/HagChoice2_2.png");
-        scene.load.image("Hag_C2_3", "../../img/Comics/Hag/HagChoice2_3_withouteyes.png");
-        scene.load.image("Hag_C2_4", "../../img/Comics/Hag/HagChoice2_3.png");
-        scene.load.image("Hag_C2_5", "../../img/Comics/Hag/HagChoice2_4.png");
-        scene.load.image("Hag_C2_6", "../../img/Comics/Hag/HagChoice2_5.png");
-
+        scene.load.image("Hag_C2", "Hag/HagChoice2.png");
+        scene.load.image("Hag_C2_1", "Hag/HagChoice2_1.png");
+        scene.load.image("Hag_C2_2", "Hag/HagChoice2_2.png");
+        scene.load.image("Hag_C2_3", "Hag/HagChoice2_3_withouteyes.png");
+        scene.load.image("Hag_C2_4", "Hag/HagChoice2_3.png");
+        scene.load.image("Hag_C2_5", "Hag/HagChoice2_4.png");
+        scene.load.image("Hag_C2_6", "Hag/HagChoice2_5.png");
+        // final
+        scene.load.image("Hag_Sleeping", "Hag/Hag_Sleeping.png");
 
         // JSON Page Lists
         scene.load.json('introPages', '../../json/introPages.json');
@@ -260,5 +263,18 @@ class ComicManager {
         //Scene Manager save status method
         this.scene.handleOutcomes(outcomes);
         //console.log(outcomes);
+    }
+
+    resizeComics(){
+        for (var i = 0; i < this.visiblePanels.length; i++) {
+            var panel = this.visiblePanels[i];
+
+            var aspectRatio = panel.displayWidth / panel.displayHeight;
+            panel.displayHeight = this.scene.cameras.main.displayHeight;
+            panel.displayWidth = panel.displayHeight * aspectRatio;
+
+            panel.x = this.scene.cameras.main.centerX;
+            panel.y = this.scene.cameras.main.centerY;
+        }
     }
 }

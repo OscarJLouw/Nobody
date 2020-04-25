@@ -85,6 +85,9 @@ class Moor extends Phaser.Scene {
     }
 
     setupEvents(){
+        // Scene events
+        this.scale.on('resize', this.Resize, this);
+
         // Pointer events
         this.input.on('pointerdown', function (pointer) {
             this.handleClick(pointer);
@@ -112,11 +115,13 @@ class Moor extends Phaser.Scene {
 
         //Collision checkers
         this.matter.world.on('collisionactive', function (event, bodyA, bodyB) {
-            if (typeof bodyA.gameObject.handleCollision === 'function') {
-                bodyA.gameObject.handleCollision(event.pairs, bodyB);
-            }
-            if (typeof bodyB.gameObject.handleCollision === 'function') {
-                bodyB.gameObject.handleCollision(event.pairs, bodyA);
+            if(bodyA.gameObject != null && bodyB.gameObject != null){
+                if (typeof bodyA.gameObject.handleCollision === 'function') {
+                    bodyA.gameObject.handleCollision(event.pairs, bodyB);
+                }
+                if (typeof bodyB.gameObject.handleCollision === 'function') {
+                    bodyB.gameObject.handleCollision(event.pairs, bodyA);
+                }
             }
         });
     }
@@ -335,7 +340,7 @@ class Moor extends Phaser.Scene {
         this.hag.setScale(0.4);
 
         // TODO: Add the sleeping hag comic!
-        this.hag.setComic("none");
+        this.hag.setComic("Hag_Sleeping");
     }
 
     updateBody(newPart){
@@ -413,5 +418,22 @@ class Moor extends Phaser.Scene {
                 this.parent.scene.comicManager.ableToStartComic = true;
             }
         });
+    }
+
+    // Resize game window with browser
+    Resize (gameSize, baseSize, displaySize, resolution)
+    {
+        var width = gameSize.width;
+        var height = gameSize.height;
+
+        this.cameras.resize(width, height);
+
+        if(this.overlay != null){
+            this.overlay.setScale(this.cameras.main.width, this.cameras.main.height);
+        }
+        
+        if(this.comicManager != null){
+            this.comicManager.resizeComics();
+        }
     }
 }
