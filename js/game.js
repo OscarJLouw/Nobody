@@ -37,7 +37,7 @@ if(debug == true){
     config.physics.matter.debug = {
         renderFill: false,
         showInternalEdges: true,
-        showConvexHulls: true
+        showConvexHulls: false
     };
 } else {
     disableDebug();

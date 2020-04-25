@@ -274,11 +274,16 @@ class Moor extends Phaser.Scene {
     update(time, delta) {
         //Debug panel
         if (debug == true) {
+            this.matter.world.drawDebug = true;
+
             if (this.debugPannel == null) {
                 this.debugPannel = document.getElementById("debugPannel");
             }
 
             this.debugPannel.innerHTML = "<b>DEBUG</b> <br>Player X Position: " + Math.round(this.player.x) + "<br>Player Y Position: " + Math.round(this.player.y);
+        } else {
+            this.matter.world.debugGraphic.clear();
+            this.matter.world.drawDebug = false;
         }
 
         // Comic manager freezes the player when in a comic
@@ -293,15 +298,31 @@ class Moor extends Phaser.Scene {
         for(var i = 0; i<outcomes.length; i++){
             switch(outcomes[i]){
                 case "hagSleeping":
-                    this.sleepHag();
+                    this.hagSleeping = true;
                     break;
                 case "choseEyes":
-                    this.updateBody("eyes");
+                    this.choseEyes = true;
+                    this.choseMouth = false;
                     break;
                 case "choseMouth":
-                    this.updateBody("mouth");
+                    this.choseEyes = false;
+                    this.choseMouth = true;
                     break;
             }
+        }
+
+        this.updateInteractables();
+    }
+
+    updateInteractables(){
+        if(this.hagSleeping){
+            this.sleepHag();
+        }
+
+        if(this.choseEyes){
+            this.updateBody("eyes");
+        } else if(this.choseMouth){
+            this.updateBody("mouth");
         }
     }
 
@@ -310,7 +331,7 @@ class Moor extends Phaser.Scene {
         this.hag.removeInteractable();
 
         this.hag = new Interactable(this, "hagSleeping", this.shapes.hag_sleeping);
-        this.hag.moveToPosition(2000, 200);
+        this.hag.moveToPosition(2000, 240);
         this.hag.setScale(0.4);
 
         // TODO: Add the sleeping hag comic!
