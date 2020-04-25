@@ -6,7 +6,6 @@ class Interactable extends Phaser.Physics.Matter.Sprite {
         this.scene = scene;
 
         this.setBody(physicsBodyName);
-        this.setScale(0.4, 0.4);
         this.setStatic(true);
 
         this.name = spriteName;

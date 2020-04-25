@@ -65,7 +65,6 @@ class Moor extends Phaser.Scene {
         if(debug != true){
             this.comicManager.startComic("Introduction");
         } else {
-            //this.overlay.alpha = 1;
             this.overlayActive = false;
 
             this.tweens.add({
@@ -180,10 +179,12 @@ class Moor extends Phaser.Scene {
         // Car
         this.car = new Interactable(this, "car", this.shapes.car_body);
         this.car.moveToPosition(2700, 1000);
+        this.car.setScale(0.4);
 
         // Hag (awake)
         this.hag = new Interactable(this, "hag", this.shapes.hag_awake);
         this.hag.moveToPosition(1800, 180);
+        this.hag.setScale(0.4);
         this.hag.setComic("Hag_FirstMeeting");
 
         // Journal

@@ -66,8 +66,10 @@ class ComicManager {
             this.comicPageIndex = 0;
             this.currentPage = this.pageList.find(x => x.pageName === this.currentComic.pages[0].name);
             this.currentPanelIndex = 0;
-
-            this.scene.fadeInOverlay();
+            
+            if(comicName != "Introduction"){
+                this.scene.fadeInOverlay();
+            }
 
             this.drawPanel(this.currentPage.panels[this.currentPanelIndex]);
         }
