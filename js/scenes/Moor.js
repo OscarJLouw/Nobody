@@ -213,7 +213,7 @@ class Moor extends Phaser.Scene {
 
         // Journal
         this.journal = new Interactable(this, "journal", null);
-        this.journal.moveToPosition(810, 630);
+        this.journal.moveToPosition(600, 740);
         this.journal.setScale(0.3);
     }
 
