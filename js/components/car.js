@@ -12,7 +12,7 @@ class Car extends Phaser.Physics.Matter.Sprite {
         //set car properties
         this.setBody(shape);
         this.setScale(0.4, 0.4);
-        this.setOrigin(0.49, 0.62);
+        //this.setOrigin(this.centerOfMass.x, this.centerOfMass.y);
         this.setDepth(y);
         this.setStatic(true); 
 
@@ -23,11 +23,6 @@ class Car extends Phaser.Physics.Matter.Sprite {
 
         this.clicked = false;
         this.setInteractive({pixelPerfect: true});
-
-        this.on('pointerdownoutside', function(pointer){
-            console.log("OUTSIDE");
-            this.clicked = false;
-        });
         
         this.on('pointerdown', this.handleClick);
     }

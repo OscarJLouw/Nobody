@@ -41,6 +41,10 @@ class Moor extends Phaser.Scene {
             this.handleClick(pointer);
         }, this);
 
+        this.input.on('pointerup', function (pointer) {
+            this.handlePointerUp(pointer);
+        }, this);
+
         this.input.on('gameobjectdown', function(pointer, gameObject) {
             this.onObjectClicked(pointer, gameObject);
         }, this);
@@ -64,8 +68,9 @@ class Moor extends Phaser.Scene {
         this.bushes = this.matter.add.image(0, 0, "bushes");
         this.bushes.setBody(shapes.bush_body);
         this.bushes.setStatic(true);
-        this.bushes.x = this.sceneConfig.sceneWidth / 2 + 130;
-        this.bushes.y = this.sceneConfig.sceneHeight / 2 + 675;
+        this.bushes.setOrigin(this.bushes.centerOfMass.x, this.bushes.centerOfMass.y);
+        this.bushes.x = this.sceneConfig.sceneWidth / 2 + ((this.bushes.centerOfMass.x-0.5) * this.bushes.displayWidth);
+        this.bushes.y = this.sceneConfig.sceneHeight / 2 + ((this.bushes.centerOfMass.y-0.5) * this.bushes.displayHeight);
         this.bushes.setDepth(5000);
 
         // Detail objects
@@ -135,8 +140,9 @@ class Moor extends Phaser.Scene {
         this.player = new Player(this, shapes.player_body);
 
         //Hag - top character
-        this.hag = new NPC(this, "hag", shapes.hag_body);
+        this.hag = new NPC(this, "hag", shapes.hag_awake);
         this.hag.setPosition(1800, 180);
+        //this.hag.setOrigin(this.hag.centerOfMass.x, this.hag.centerOfMass.y);
         this.hag.setInteractive({pixelPerfect: true});
         this.hag.isInteractable = true;
         this.interactableList.push(this.hag);
@@ -271,6 +277,7 @@ class Moor extends Phaser.Scene {
     }
 
     handleClick(pointer) {
+        this.input.setDefaultCursor('url(../../img/cursorClick.cur), pointer');
 
       if (this.comicManager.currentlyInComic) {
             if (this.comicManager.makingChoice != true) {
@@ -280,6 +287,10 @@ class Moor extends Phaser.Scene {
         } else {
             this.player.targetPosition = new Phaser.Math.Vector2(pointer.worldX, pointer.worldY);
         }
+    }
+
+    handlePointerUp(pointer) {
+        this.input.setDefaultCursor('url(../../img/cursor.cur), pointer');
     }
 
     fadeInOverlay(fadeTime = 1000){

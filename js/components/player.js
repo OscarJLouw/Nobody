@@ -11,7 +11,7 @@ class Player extends Phaser.Physics.Matter.Sprite {
         //set player properties
         this.setBody(shape);
         this.setPosition(x, y);
-        this.setOrigin(0.5, 1);
+        //this.setOrigin(0.5, 0.85);
         this.setDepth(y);
         this.setScale(0.5);
         
