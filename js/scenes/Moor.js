@@ -28,7 +28,7 @@ class Moor extends Phaser.Scene {
         this.setupEvents();
 
         // Add the background
-        this.background = new Level(this, "background", 0);
+        this.background = new Background(this, "background", 0);
 
         // Add the player
         this.player = new Player(this, this.shapes.player_body);
@@ -118,14 +118,14 @@ class Moor extends Phaser.Scene {
 
     createScenery(){
         // Bushes overlay
-        this.bushes = this.matter.add.image(0, 0, "bushes");
-        this.bushes.setBody(this.shapes.bush_body);
-        this.bushes.setStatic(true);
+        this.bushes = new PhysicsProp(this, "bushes", this.shapes.bush_body);
         this.bushes.setOrigin(this.bushes.centerOfMass.x, this.bushes.centerOfMass.y);
-        this.bushes.x = this.sceneConfig.sceneWidth / 2 + ((this.bushes.centerOfMass.x-0.5) * this.bushes.displayWidth);
-        this.bushes.y = this.sceneConfig.sceneHeight / 2 + ((this.bushes.centerOfMass.y-0.5) * this.bushes.displayHeight);
-        this.bushes.setDepth(5000);
+        this.bushes.moveToPosition(
+            this.sceneConfig.sceneWidth / 2 + ((this.bushes.centerOfMass.x-0.5) * this.bushes.displayWidth),
+            this.sceneConfig.sceneHeight / 2 + ((this.bushes.centerOfMass.y-0.5) * this.bushes.displayHeight));
 
+        this.bushes.setDepth(5000);
+        
         // Detail objects
         this.detail = this.add.image(0, 0, "detail");
         this.detail.x = this.sceneConfig.sceneWidth / 2;
@@ -172,7 +172,8 @@ class Moor extends Phaser.Scene {
         }
 
         // Fence
-        this.fence = new Level(this, "fence", 0);
+        this.fence = new PhysicsProp(this, "fence", this.shapes.fence_body);
+        this.fence.moveToPosition(this.sceneConfig.sceneWidth / 2 + ((this.fence.centerOfMass.x-0.5) * this.fence.displayWidth), 50);
     }
 
     createInteractables(){

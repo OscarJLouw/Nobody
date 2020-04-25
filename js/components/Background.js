@@ -1,4 +1,4 @@
-class Level extends Phaser.GameObjects.Sprite {
+class Background extends Phaser.GameObjects.Sprite {
     constructor(scene, layer, depth) {
 
         //npc position on the screen

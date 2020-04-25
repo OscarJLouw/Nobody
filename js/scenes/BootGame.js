@@ -56,17 +56,7 @@ class BootGame extends Phaser.Scene {
             percentText.destroy();
         });
 
-        this.load.image("background", "../../img/moor_tiny.jpg");
-        this.load.image("bushes", "../../img/moor_bush_small.png");
-        this.load.image("fence", "../../img/fence.png");
-        this.load.image("car", "../../img/Objects/car.png");
-        this.load.image("hag", "../../img/Objects/hag.png");
-        this.load.image("detail", "../../img/Objects/detail.png");
-        this.load.image("journal", "../../img/Objects/journal.png");
-        this.load.image("brush1", "../../img/Objects/brush1.png");
-        this.load.image("brush2", "../../img/Objects/brush2.png");
-        this.load.image("brush3", "../../img/Objects/brush3.png");
-
+        /** PLAYER **/
         this.load.spritesheet("player", "../../img/player/Animation/PlayerAnimation.png", {
             frameWidth: 256,
             frameHeight: 256
@@ -79,6 +69,19 @@ class BootGame extends Phaser.Scene {
 
         // Load Physics body shapes from JSON file generated using PhysicsEditor
         this.load.json('shapes', '../../physics/physics-shapes.json');
+
+        /** MOOR IMAGES **/
+        this.load.setBaseURL("../../img/Moor");
+        this.load.image("background", "Backgrounds/moor_tiny.jpg");
+        this.load.image("bushes", "Backgrounds/moor_bush_small.png");
+        this.load.image("fence", "Props/fence.png");
+        this.load.image("detail", "Props/detail.png");
+        this.load.image("brush1", "Props/brush1.png");
+        this.load.image("brush2", "Props/brush2.png");
+        this.load.image("brush3", "Props/brush3.png");
+        this.load.image("car", "Interactables/car.png");
+        this.load.image("hag", "Interactables/hag.png");
+        this.load.image("journal", "Interactables/journal.png");
     }
 
     // create is called when scene is loaded
