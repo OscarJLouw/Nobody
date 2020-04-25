@@ -75,10 +75,18 @@ class BootGame extends Phaser.Scene {
         this.load.image("background", "Backgrounds/moor_tiny.jpg");
         this.load.image("bushes", "Backgrounds/moor_bush_small.png");
         this.load.image("fence", "Props/fence.png");
-        this.load.image("detail", "Props/detail.png");
         this.load.image("brush1", "Props/brush1.png");
         this.load.image("brush2", "Props/brush2.png");
         this.load.image("brush3", "Props/brush3.png");
+
+        this.load.image("detail1", "Props/detail1.png");
+        this.load.image("detail2", "Props/detail2.png");
+        this.load.image("detail3", "Props/detail3.png");
+        this.load.image("detail4", "Props/detail4.png");
+        this.load.image("detail5", "Props/detail5.png");
+        this.load.image("detail6", "Props/detail6.png");
+        this.load.image("detail7", "Props/detail7.png");
+
         this.load.image("car", "Interactables/car.png");
         this.load.image("hag", "Interactables/hag.png");
         this.load.image("journal", "Interactables/journal.png");

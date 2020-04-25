@@ -125,12 +125,35 @@ class Moor extends Phaser.Scene {
             this.sceneConfig.sceneHeight / 2 + ((this.bushes.centerOfMass.y-0.5) * this.bushes.displayHeight));
 
         this.bushes.setDepth(5000);
-        
+
         // Detail objects
-        this.detail = this.add.image(0, 0, "detail");
-        this.detail.x = this.sceneConfig.sceneWidth / 2;
-        this.detail.y = this.sceneConfig.sceneHeight / 2;
-        this.detail.setDepth(6);
+        this.detail1 = new PhysicsProp(this, "detail1", this.shapes.detail1);
+        this.detail1.moveToPosition(2530,1940);
+        this.detail1.setScale(0.4);
+
+        this.detail2 = new PhysicsProp(this, "detail2", this.shapes.detail2);
+        this.detail2.moveToPosition(1100,1640);
+        this.detail2.setScale(0.4);
+        
+        this.detail3 = new PhysicsProp(this, "detail3", this.shapes.detail3);
+        this.detail3.moveToPosition(540,1720);
+        this.detail3.setScale(0.4);
+        
+        this.detail4 = new PhysicsProp(this, "detail4", this.shapes.detail4);
+        this.detail4.moveToPosition(530,1160);
+        this.detail4.setScale(0.4);
+        
+        this.detail5 = new PhysicsProp(this, "detail5", this.shapes.detail5);
+        this.detail5.moveToPosition(500,500);
+        this.detail5.setScale(0.4);
+        
+        this.detail6 = new PhysicsProp(this, "detail6", this.shapes.detail6);
+        this.detail6.moveToPosition(3080,560);
+        this.detail6.setScale(0.4);
+        
+        this.detail7 = new PhysicsProp(this, "detail7", this.shapes.detail7);
+        this.detail7.moveToPosition(3180,660);
+        this.detail7.setScale(0.4);
 
         // Brush patch bottom
         for (var i = 0; i < 30; i++) {
