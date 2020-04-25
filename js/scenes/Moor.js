@@ -11,18 +11,48 @@ class Moor extends Phaser.Scene {
 
     // Loads all assets before scene starts
     preload() {
-
-        this.brushes = ["brush1", "brush2", "brush3"];
-
         this.comicManager = new ComicManager(this);
+        // Preload all the comic files
         this.comicManager.loadComics(this);
-
-        this.interactableList = [];
-
     }
 
     // Called when scene is loaded
     create() {
+        // Create camera
+        this.cameras.main.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
+
+        // Physics shapes
+        this.shapes = this.cache.json.get('shapes');
+
+        // Set up events
+        this.setupEvents();
+
+        // Add the background
+        this.background = new Level(this, "background", 0);
+
+        // Add the player
+        this.player = new Player(this, this.shapes.player_body);
+
+        // Place the scenery and detail objects
+        this.brushes = ["brush1", "brush2", "brush3"];
+        this.createScenery();
+
+        // Add Interactables/NPCs
+        this.interactableList = [];
+        this.createInteractables();
+
+        // Camera smooth following
+        this.cameras.main.startFollow(this.player, false, 0.1, 0.1); //, 0.05, 0.05);
+        this.cameras.main.roundPx = false;
+        this.cameras.main.setRoundPixels(false);
+
+        // Physics
+        this.matter.world.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
+
+        // Particle systems
+        this.createParticles();
+
+        // White overlay for comics
         this.overlay = this.add.graphics();
         this.overlay.fillStyle(0xffffff, 1);
         this.overlay.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
@@ -30,13 +60,28 @@ class Moor extends Phaser.Scene {
         this.overlay.setDepth(99999);
         this.overlayActive = true;
 
-        // Camera
-        this.cameras.main.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
+        // Comic manager
+        this.comicManager.loadJSONComics(this);
+        if(debug != true){
+            this.comicManager.startComic("Introduction");
+        } else {
+            //this.overlay.alpha = 1;
+            this.overlayActive = false;
 
-        // Physics shapes
-        var shapes = this.cache.json.get('shapes');
+            this.tweens.add({
+                targets: this.overlay,
+                alpha: 0,
+                duration: 3000,
+                ease: 'Power2',
+                onComplete: function(){
+                    this.parent.scene.overlay.setVisible(false);
+                }
+            });
+        }
+    }
 
-        // Set up events
+    setupEvents(){
+        // Pointer events
         this.input.on('pointerdown', function (pointer) {
             this.handleClick(pointer);
         }, this);
@@ -61,12 +106,21 @@ class Moor extends Phaser.Scene {
             this.onObjectOut(pointer, gameObject);
         }, this);
 
-        //Game Components
-        this.background = new Level(this, "background", 0);
+        //Collision checkers
+        this.matter.world.on('collisionactive', function (event, bodyA, bodyB) {
+            if (typeof bodyA.gameObject.handleCollision === 'function') {
+                bodyA.gameObject.handleCollision(event.pairs, bodyB);
+            }
+            if (typeof bodyB.gameObject.handleCollision === 'function') {
+                bodyB.gameObject.handleCollision(event.pairs, bodyA);
+            }
+        });
+    }
 
+    createScenery(){
         // Bushes overlay
         this.bushes = this.matter.add.image(0, 0, "bushes");
-        this.bushes.setBody(shapes.bush_body);
+        this.bushes.setBody(this.shapes.bush_body);
         this.bushes.setStatic(true);
         this.bushes.setOrigin(this.bushes.centerOfMass.x, this.bushes.centerOfMass.y);
         this.bushes.x = this.sceneConfig.sceneWidth / 2 + ((this.bushes.centerOfMass.x-0.5) * this.bushes.displayWidth);
@@ -78,16 +132,6 @@ class Moor extends Phaser.Scene {
         this.detail.x = this.sceneConfig.sceneWidth / 2;
         this.detail.y = this.sceneConfig.sceneHeight / 2;
         this.detail.setDepth(6);
-
-        // Journal
-        this.journal = new NPC(this, "journal", null);
-        this.journal.name = "Journal";
-        this.journal.setPosition(810, 630);
-        this.journal.setScale(0.3);
-        this.journal.setDepth(this.journal.y);
-        this.journal.setInteractive();
-        this.journal.isInteractable = true;
-        this.interactableList.push(this.journal);
 
         // Brush patch bottom
         for (var i = 0; i < 30; i++) {
@@ -130,35 +174,29 @@ class Moor extends Phaser.Scene {
 
         // Fence
         this.fence = new Level(this, "fence", 0);
+    }
 
+    createInteractables(){
         // Car
-        this.car = new Car(this, shapes.car_body);
-        this.car.isInteractable = true;
-        this.interactableList.push(this.car);
+        this.car = new Interactable(this, "car", this.shapes.car_body);
+        this.car.moveToPosition(2700, 1000);
 
-        // Player
-        this.player = new Player(this, shapes.player_body);
+        // Hag (awake)
+        this.hag = new Interactable(this, "hag", this.shapes.hag_awake);
+        this.hag.moveToPosition(1800, 180);
+        this.hag.setComic("Hag_FirstMeeting");
 
-        //Hag - top character
-        this.hag = new NPC(this, "hag", shapes.hag_awake);
-        this.hag.setPosition(1800, 180);
-        //this.hag.setOrigin(this.hag.centerOfMass.x, this.hag.centerOfMass.y);
-        this.hag.setInteractive({pixelPerfect: true});
-        this.hag.isInteractable = true;
-        this.interactableList.push(this.hag);
+        // Journal
+        this.journal = new Interactable(this, "journal", null);
+        this.journal.moveToPosition(810, 630);
+        this.journal.setScale(0.3);
+    }
 
-        // Camera smooth following
-        this.cameras.main.startFollow(this.player, false, 0.1, 0.1); //, 0.05, 0.05);
-        this.cameras.main.roundPx = false;
-        this.cameras.main.setRoundPixels(false);
-
-        // Physics
-        this.matter.world.setBounds(0, 0, this.sceneConfig.sceneWidth, this.sceneConfig.sceneHeight);
-
-        // Particle systems
+    createParticles(){
         this.fireflyParticles = this.add.particles("firefly");
         this.fireflyParticles.setDepth(5000);
 
+        // Emission shapes
         var emissionCircle = new Phaser.Geom.Circle(0, 0, 1500);
         var emissionCircle2 = new Phaser.Geom.Circle(0, 0, 300);
 
@@ -201,35 +239,6 @@ class Moor extends Phaser.Scene {
             maxParticles: 200,
             particleClass: FireflyParticles
         });
-
-        //Collision checkers
-        this.matter.world.on('collisionactive', function (event, bodyA, bodyB) {
-            if (typeof bodyA.gameObject.handleCollision === 'function') {
-                bodyA.gameObject.handleCollision(event.pairs, bodyB);
-            }
-            if (typeof bodyB.gameObject.handleCollision === 'function') {
-                bodyB.gameObject.handleCollision(event.pairs, bodyA);
-            }
-        });
-
-        this.comicManager.loadJSONComics(this);
-        if(debug != true){
-            this.comicManager.startComic("Introduction");
-        } else {
-            //this.overlay.alpha = 1;
-            this.overlayActive = false;
-
-            this.tweens.add({
-                targets: this.overlay,
-                alpha: 0,
-                duration: 3000,
-                ease: 'Power2',
-                onComplete: function(){
-                    this.parent.scene.overlay.setVisible(false);
-                }
-            });
-        }
-
     }
 
     update(time, delta) {
@@ -240,9 +249,9 @@ class Moor extends Phaser.Scene {
             }
 
             this.debugPannel.innerHTML = "<b>DEBUG</b> <br>Player X Position: " + Math.round(this.player.x) + "<br>Player Y Position: " + Math.round(this.player.y);
-
         }
 
+        // Comic manager freezes the player when in a comic
         if (this.comicManager.currentlyInComic != true) {
             this.player.movePlayer(.2 * delta, delta);
         } else {
@@ -319,15 +328,3 @@ class Moor extends Phaser.Scene {
         });
     }
 }
-
-/****** USEFUL FUNCTIONS ******/
-
-/*
-var randomX = Phaser.Math.Between(0, config.width);
-
-this.add.text(20, 20, "Text goes here", {
-    font: "25px Arial",
-    fill: "yellow"
-});
-
-*/
