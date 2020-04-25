@@ -77,6 +77,11 @@ class Moor extends Phaser.Scene {
                 }
             });
         }
+
+        // Comic outcomes
+        this.hagSleeping = false;
+        this.choseEyes = false;
+        this.choseMouth = false;
     }
 
     setupEvents(){
@@ -281,6 +286,42 @@ class Moor extends Phaser.Scene {
             this.player.movePlayer(.2 * delta, delta);
         } else {
             this.player.freezePlayer();
+        }
+    }
+
+    handleOutcomes(outcomes){
+        for(var i = 0; i<outcomes.length; i++){
+            switch(outcomes[i]){
+                case "hagSleeping":
+                    this.sleepHag();
+                    break;
+                case "choseEyes":
+                    this.updateBody("eyes");
+                    break;
+                case "choseMouth":
+                    this.updateBody("mouth");
+                    break;
+            }
+        }
+    }
+
+    sleepHag(){
+        // put the hag to sleep
+        this.hag.removeInteractable();
+
+        this.hag = new Interactable(this, "hagSleeping", this.shapes.hag_sleeping);
+        this.hag.moveToPosition(2000, 200);
+        this.hag.setScale(0.4);
+
+        // TODO: Add the sleeping hag comic!
+        this.hag.setComic("none");
+    }
+
+    updateBody(newPart){
+        if(newPart == "eyes"){
+            // change the player sprite to add eyes
+        } else if(newPart == "mouth"){
+            // change the player sprite to add mouth
         }
     }
 

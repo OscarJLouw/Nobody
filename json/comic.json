@@ -51,7 +51,7 @@
                 {
                     "name": "Hag_Choice1_4",
                     "next": "none",
-                    "outcomes": ["choseMouth", "sleepHag"]
+                    "outcomes": ["choseMouth", "hagSleeping"]
                 },
                 
                 {
@@ -73,7 +73,7 @@
                 {
                     "name": "Hag_Choice2_5",
                     "next": "none",
-                    "outcomes": ["choseEyes", "sleepHag"]
+                    "outcomes": ["choseEyes", "hagSleeping"]
                 }
             ]
         }
