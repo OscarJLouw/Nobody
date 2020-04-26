@@ -82,6 +82,14 @@ class Moor extends Phaser.Scene {
         this.hagSleeping = false;
         this.choseEyes = false;
         this.choseMouth = false;
+
+        // Music
+        this.music = this.sound.add('nobodypt1');
+        this.music.pauseOnBlur = false;
+
+        this.music.play({
+            loop: true
+        });
     }
 
     setupEvents(){
@@ -223,7 +231,7 @@ class Moor extends Phaser.Scene {
 
         // Journal
         this.journal = new Interactable(this, "journal", null);
-        this.journal.moveToPosition(600, 740);
+        this.journal.moveToPosition(3230, 1560);
         this.journal.setScale(0.3);
     }
 
@@ -280,6 +288,10 @@ class Moor extends Phaser.Scene {
         //Debug panel
         if (debug == true) {
             this.matter.world.drawDebug = true;
+            
+            if(this.music.isPlaying){
+                this.music.pause();
+            }
 
             if (this.debugPannel == null) {
                 this.debugPannel = document.getElementById("debugPannel");
@@ -287,8 +299,14 @@ class Moor extends Phaser.Scene {
 
             this.debugPannel.innerHTML = "<b>DEBUG</b> <br>Player X Position: " + Math.round(this.player.x) + "<br>Player Y Position: " + Math.round(this.player.y);
         } else {
-            this.matter.world.debugGraphic.clear();
-            this.matter.world.drawDebug = false;
+            if(this.music.isPaused){
+                this.music.resume();
+            }
+
+            if(this.matter.world.debugGraphic != undefined){
+                this.matter.world.debugGraphic.clear();
+                this.matter.world.drawDebug = false;
+            }
         }
 
         // Comic manager freezes the player when in a comic

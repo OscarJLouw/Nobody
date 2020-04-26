@@ -102,6 +102,20 @@ class BootGame extends Phaser.Scene {
         this.load.image("hag", "Interactables/hag.png");
         this.load.image("hagSleeping", "Interactables/hag_sleeping.png");
         this.load.image("journal", "Interactables/journal.png");
+
+        /* AUDIO */
+        // Music
+        this.load.audio('nobodypt1', [
+            '../../audio/nobodypt1.ogg',
+            '../../audio/nobodypt1.mp3'
+        ]);
+
+        /*
+        this.load.setBaseURL("./audio");
+        
+
+        this.load.setBaseURL("");
+        */
     }
 
     // create is called when scene is loaded
