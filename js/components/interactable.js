@@ -52,10 +52,23 @@ class Interactable extends Phaser.Physics.Matter.Sprite {
         this.clicked = _status;
     }
     
-    removeInteractable(){
-        var name = this.name;
-        this.scene.interactableList = this.scene.interactableList.filter(function(element) { return element.name != name; }); 
-        this.scene.matter.world.remove(this);
-        this.destroy();
+    removeInteractable(fade = true){
+        if(fade == true){
+            this.scene.tweens.add({
+                targets: this,
+                alpha: 0,
+                duration: 500,
+                ease: 'Cubic.InOut',
+                onComplete: function(){
+                    this.targets[0].removeInteractable(false);
+                }
+            });
+        } else {
+            console.log("Removed");
+            var name = this.name;
+            this.scene.interactableList = this.scene.interactableList.filter(function(element) { return element.name != name; }); 
+            this.scene.matter.world.remove(this);
+            this.destroy();
+        }
     }
 }

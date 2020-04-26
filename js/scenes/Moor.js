@@ -85,11 +85,10 @@ class Moor extends Phaser.Scene {
 
         // Music
         this.music = this.sound.add('nobodypt1');
-        this.music.pauseOnBlur = false;
-
         this.music.play({
             loop: true
         });
+        this.sound.pauseOnBlur = false;
     }
 
     setupEvents(){

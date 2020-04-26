@@ -6,6 +6,22 @@ class ComicManager {
         this.makingChoice = false;
         this.ableToInteract = true;
         this.ableToStartComic = true;
+
+        var xPosition = this.scene.cameras.main.width/2;
+        var yPosition = this.scene.cameras.main.height - 30;
+        this.choiceText = this.scene.make.text({
+            x: xPosition,
+            y: yPosition,
+            text: 'Choose one',
+            style: {
+                font: '22px monospace',
+                fill: '#000000'
+            }
+        });
+        this.choiceText.setOrigin(0.5, 1);
+        this.choiceText.setDepth(999999);
+        this.choiceText.setScrollFactor(0);
+        this.choiceText.setAlpha(0);
     }
 
     loadComics(scene) {
@@ -191,12 +207,17 @@ class ComicManager {
             });
         }
 
+        this.scene.tweens.add({
+            targets: this.choiceText,
+            alpha: 1,
+            duration: 200,
+            ease: 'Cubic.InOut'
+        });
     }
 
     nextPage(next = "null") {
         if(next !="null"){
-
-            // this panel was clicked
+            // a choice pannel was clicked (probably, lol)
             this.clearVisiblePanels();
             this.makingChoice = false;
 
@@ -208,6 +229,13 @@ class ComicManager {
             
             this.drawPanel(this.currentPage.panels[this.currentPanelIndex]);
 
+            this.scene.tweens.add({
+                targets: this.choiceText,
+                alpha: 0,
+                duration: 200,
+                ease: 'Cubic.InOut'
+            });
+
             return false;
         } else {
             if (this.currentComic.pages[this.comicPageIndex].next == "none") {
@@ -217,6 +245,7 @@ class ComicManager {
                 if (this.currentComic.comicName != "Introduction") {
                     this.scene.fadeOutOverlay();
                 } else {
+                    // extra slow fade out after introduction
                     this.scene.fadeOutOverlay(3000);
                 }
 
